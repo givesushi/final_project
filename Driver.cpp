@@ -1,4 +1,6 @@
 #include "Driver.h"
+#include "Counter.h"
+
 
 //constructor
 Driver::Driver(string infile){
@@ -49,7 +51,9 @@ Driver::Driver(string infile){
   proportion_straight_trucks = 1 - proportion_left_turn_trucks - proportion_right_turn_trucks;
 }
 
-void Driver::generateVehicles(double rand, Animator anim){
+Driver::~Driver(){}
+
+void Driver::generateVehicles(double rand, Counter& counter){ //, Animator anim){
 
   //values for generating new vehicles each clock tick
   //EAST
@@ -119,117 +123,273 @@ void Driver::generateVehicles(double rand, Animator anim){
   //Generate a new vehicle based on random number for each lane.
   //EAST
   if(rand < east_truck_s){
+		total_vehicles++;
+		total_eb++;
     if(rand < east_car_l){
       //to do: write in constructors and add to lanes.
+			counter.count(Direction::east, VehicleType::car,Turn::left );
+			// std::cout << "East Car L" << std::endl;
     }else if(rand < east_car_r){
-
+			counter.count(Direction::east, VehicleType::car,Turn::right);
+			// std::cout << "East Car R" << std::endl;
     }else if(rand < east_car_s){
-
+			counter.count(Direction::east, VehicleType::car,Turn::straight );
+			// std::cout << "East Car S" << std::endl;
     }else if(rand < east_SUV_l){
-
+			counter.count(Direction::east, VehicleType::suv,Turn::left );
+			// std::cout << "East SUV L" << std::endl;
     }else if(rand < east_SUV_r){
-
+			counter.count(Direction::east, VehicleType::suv,Turn::right );
+			// std::cout << "East SUV R" << std::endl;
     }else if(rand < east_SUV_s){
-
+			counter.count(Direction::east, VehicleType::suv,Turn::straight );
+			// std::cout << "East SUV S" << std::endl;
     }else if(rand < east_truck_l){
-
+			counter.count(Direction::east, VehicleType::truck,Turn::left );
+			// std::cout << "East Truck L" << std::endl;
     }else if(rand < east_truck_r){
-
+			counter.count(Direction::east, VehicleType::truck,Turn::right );
+			// std::cout << "East Truck R" << std::endl;
     }else{
-
+			counter.count(Direction::east, VehicleType::truck,Turn::straight );
+			// std::cout << "East Truck S" << std::endl;
     }
   }
 
   //WEST
   if(rand < west_truck_s){
+		total_vehicles++;
+		total_wb++;
     if(rand < west_car_l){
-
+			counter.count(Direction::west, VehicleType::car,Turn::left );
+			// std::cout << "West Car L" << std::endl;
     }else if(rand < west_car_r){
-
+			counter.count(Direction::west, VehicleType::car,Turn::right );
+			// std::cout << "West Car R" << std::endl;
     }else if(rand < west_car_s){
-
+			counter.count(Direction::west, VehicleType::car,Turn::straight);
+			// std::cout << "West Car S" << std::endl;
     }else if(rand < west_SUV_l){
-
+			counter.count(Direction::west, VehicleType::suv,Turn::left );
+			// std::cout << "West SUV L" << std::endl;
     }else if(rand < west_SUV_r){
-
+			counter.count(Direction::west, VehicleType::suv,Turn::right );
+			// std::cout << "West SUV R" << std::endl;
     }else if(rand < west_SUV_s){
-
+			counter.count(Direction::west, VehicleType::suv,Turn::straight );
+			// std::cout << "West SUV S" << std::endl;
     }else if(rand < west_truck_l){
-
+			counter.count(Direction::west, VehicleType::truck,Turn::left );
+			// std::cout << "West Truck L" << std::endl;
     }else if(rand < west_truck_r){
-
+			counter.count(Direction::west, VehicleType::truck,Turn::right );
+			// std::cout << "West Truck R" << std::endl;
     }else{
-
+			counter.count(Direction::west, VehicleType::truck,Turn::straight );
+			// std::cout << "West Truck S" << std::endl;
     }
   }
 
   //NORTH
   if(rand < north_truck_s){
+		total_vehicles++;
+		total_nb++;
     if(rand < north_car_l){
-
+			counter.count(Direction::north, VehicleType::car,Turn::left );
+			// std::cout << "North Car L" << std::endl;
     }else if(rand < north_car_r){
-
+			counter.count(Direction::north, VehicleType::car,Turn::right );
+			// std::cout << "North Car R" << std::endl;
     }else if(rand < north_car_s){
-
+			counter.count(Direction::north, VehicleType::car,Turn::straight );
+			// std::cout << "North Car S" << std::endl;
     }else if(rand < north_SUV_l){
-
+			counter.count(Direction::north, VehicleType::suv,Turn::left );
+			// std::cout << "North SUV L" << std::endl;
     }else if(rand < north_SUV_r){
-
+			counter.count(Direction::north, VehicleType::suv,Turn::right );
+			// std::cout << "North SUV R" << std::endl;
     }else if(rand < north_SUV_s){
-
+			counter.count(Direction::north, VehicleType::suv,Turn::straight );
+			// std::cout << "North SUV S" << std::endl;
     }else if(rand < north_truck_l){
-
+			counter.count(Direction::north, VehicleType::truck,Turn::left );
+			// std::cout << "North Truck L" << std::endl;
     }else if(rand < north_truck_r){
-
+			counter.count(Direction::north, VehicleType::truck,Turn::right );
+			// std::cout << "North Truck R" << std::endl;
     }else{
-
+			counter.count(Direction::north, VehicleType::truck,Turn::straight );
+			// std::cout << "North Truck S" << std::endl;
     }
   }
 
   //SOUTH
   if(rand < south_truck_s){
+		total_vehicles++;
+		total_sb++;
     if(rand < south_car_l){
-
+			counter.count(Direction::south, VehicleType::car,Turn::left );
+			// std::cout << "South Car L" << std::endl;
     }else if(rand < south_car_r){
-
+			counter.count(Direction::south, VehicleType::car,Turn::right );
+			// std::cout << "South Car R" << std::endl;
     }else if(rand < south_car_s){
-
+			counter.count(Direction::south, VehicleType::car,Turn::straight );
+			// std::cout << "South Car S" << std::endl;
     }else if(rand < south_SUV_l){
-
+			counter.count(Direction::south, VehicleType::suv,Turn::left );
+			// std::cout << "South SUV L" << std::endl;
     }else if(rand < south_SUV_r){
-
+			counter.count(Direction::south, VehicleType::suv,Turn::right );
+			// std::cout << "South SUV R" << std::endl;
     }else if(rand < south_SUV_s){
-
+			counter.count(Direction::south, VehicleType::suv,Turn::straight );
+			// std::cout << "South SUV S" << std::endl;
     }else if(rand < south_truck_l){
-
+			counter.count(Direction::south, VehicleType::truck,Turn::left );
+			// std::cout << "South Truck L" << std::endl;
     }else if(rand < south_truck_r){
-
+			counter.count(Direction::south, VehicleType::truck,Turn::right );
+			// std::cout << "South Truck R" << std::endl;
     }else{
-
+			counter.count(Direction::south, VehicleType::truck,Turn::straight );
+			// std::cout << "South Truck S" << std::endl;
     }
   }
 
 
 }
 
-void Driver::run(){
+void Driver::generate(uniform_real_distribution<double>& rand, mt19937& randomNumberGenerator, Counter& counter){
+	double r = rand(randomNumberGenerator);
+	if( r < prob_new_vehicle_northbound){
+		Turn t = Turn::straight;
+		VehicleType type = VehicleType::truck;
+		r = rand(randomNumberGenerator);
+		if( r < proportion_of_cars ) { type = VehicleType::car; }
+		else if( r < proportion_of_cars + proportion_of_SUVs ) { type = VehicleType::suv; }
+
+		r = rand(randomNumberGenerator);
+		switch (type) {
+			case VehicleType::car :
+				if( r < proportion_right_turn_cars ) { t = Turn::right; }
+				else if( r < proportion_right_turn_cars + proportion_left_turn_cars ) { t = Turn::left; }
+				break;
+			case VehicleType::suv :
+				if( r < proportion_right_turn_SUVs ) { t = Turn::right; }
+				else if( r < proportion_right_turn_SUVs + proportion_left_turn_SUVs ) { t = Turn::left; }
+				break;
+			case VehicleType::truck :
+				if( r < proportion_right_turn_trucks ) { t = Turn::right; }
+				else if( r < proportion_right_turn_trucks + proportion_left_turn_trucks ) { t = Turn::left; }
+				break;
+		}
+		counter.count(Direction::north, type, t);
+
+	}
+
+	r = rand(randomNumberGenerator);
+	if( r < prob_new_vehicle_southbound){
+		Turn t = Turn::straight;
+		VehicleType type = VehicleType::truck;
+		r = rand(randomNumberGenerator);
+		if( r < proportion_of_cars ) { type = VehicleType::car; }
+		else if( r < proportion_of_cars + proportion_of_SUVs ) { type = VehicleType::suv; }
+
+		r = rand(randomNumberGenerator);
+		switch (type) {
+			case VehicleType::car :
+				if( r < proportion_right_turn_cars ) { t = Turn::right; }
+				else if( r < proportion_right_turn_cars + proportion_left_turn_cars ) { t = Turn::left; }
+				break;
+			case VehicleType::suv :
+				if( r < proportion_right_turn_SUVs ) { t = Turn::right; }
+				else if( r < proportion_right_turn_SUVs + proportion_left_turn_SUVs ) { t = Turn::left; }
+				break;
+			case VehicleType::truck :
+				if( r < proportion_right_turn_trucks ) { t = Turn::right; }
+				else if( r < proportion_right_turn_trucks + proportion_left_turn_trucks ) { t = Turn::left; }
+				break;
+		}
+		counter.count(Direction::south, type, t);
+	}
+
+  r = rand(randomNumberGenerator);
+	if( r < prob_new_vehicle_eastbound){
+		Turn t = Turn::straight;
+		VehicleType type = VehicleType::truck;
+		r = rand(randomNumberGenerator);
+		if( r < proportion_of_cars ) { type = VehicleType::car; }
+		else if( r < proportion_of_cars + proportion_of_SUVs ) { type = VehicleType::suv; }
+
+		r = rand(randomNumberGenerator);
+		switch (type) {
+			case VehicleType::car :
+				if( r < proportion_right_turn_cars ) { t = Turn::right; }
+				else if( r < proportion_right_turn_cars + proportion_left_turn_cars ) { t = Turn::left; }
+				break;
+			case VehicleType::suv :
+				if( r < proportion_right_turn_SUVs ) { t = Turn::right; }
+				else if( r < proportion_right_turn_SUVs + proportion_left_turn_SUVs ) { t = Turn::left; }
+				break;
+			case VehicleType::truck :
+				if( r < proportion_right_turn_trucks ) { t = Turn::right; }
+				else if( r < proportion_right_turn_trucks + proportion_left_turn_trucks ) { t = Turn::left; }
+				break;
+		}
+		counter.count(Direction::east, type, t);
+	}
+
+	r = rand(randomNumberGenerator);
+	if( r < prob_new_vehicle_westbound){
+		Turn t = Turn::straight;
+		VehicleType type = VehicleType::truck;
+		r = rand(randomNumberGenerator);
+		if( r < proportion_of_cars ) { type = VehicleType::car; }
+		else if( r < proportion_of_cars + proportion_of_SUVs ) { type = VehicleType::suv; }
+
+		r = rand(randomNumberGenerator);
+		switch (type) {
+			case VehicleType::car :
+				if( r < proportion_right_turn_cars ) { t = Turn::right; }
+				else if( r < proportion_right_turn_cars + proportion_left_turn_cars ) { t = Turn::left; }
+				break;
+			case VehicleType::suv :
+				if( r < proportion_right_turn_SUVs ) { t = Turn::right; }
+				else if( r < proportion_right_turn_SUVs + proportion_left_turn_SUVs ) { t = Turn::left; }
+				break;
+			case VehicleType::truck :
+				if( r < proportion_right_turn_trucks ) { t = Turn::right; }
+				else if( r < proportion_right_turn_trucks + proportion_left_turn_trucks ) { t = Turn::left; }
+				break;
+		}
+		counter.count(Direction::west, type, t);
+	}
+}
+
+std::vector<double> Driver::run(int seed){
 
   //Animator to draw simulation
-  Animator anim(this->number_of_sections_before_intersection);
+  //Animator anim(this->number_of_sections_before_intersection);
 
   //random number generation
   mt19937 randomNumberGenerator;
   uniform_real_distribution<double> rand_double(0.0, 1.0);
+	randomNumberGenerator.seed(seed);
   double rand;
 
   int clock = 0;
+	Counter counter;
 
   //main loop for the simulation
   while(clock < maximum_simulated_time){
 
     rand = rand_double(randomNumberGenerator);
+		// std::cout << "Clock time: " << clock << "  :  Rand: " << rand << std::endl;
+    generateVehicles(rand, counter); //, anim);
 
-    generateVehicles(rand, anim);
+		// generate(rand_double, randomNumberGenerator, counter);
 
     /*
     For each clock tick:
@@ -246,9 +406,36 @@ void Driver::run(){
     clock++;
   }
 
+	return counter.stats(maximum_simulated_time);
+
 }
 
 int main(int argc, char* argv[]){
+	std::vector<double> totals{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+	std::vector<double> temp;
+	Driver d("input_file_format.txt");
+	for(int i = 100; i < 200; i++){
+		temp = d.run(i);
+		for(int j = 0; j < 16; j++){
+			totals[j] += temp[j];
+		}
+	}
+	std::cout << "prob_new_vehicle_northbound: " << totals[0]/100 << std::endl;
+	std::cout << "prob_new_vehicle_southbound: " << totals[1]/100 << std::endl;
+	std::cout << "prob_new_vehicle_eastbound: " << totals[2]/100 << std::endl;
+	std::cout << "prob_new_vehicle_westbound: " << totals[3]/100 << std::endl;
+	std::cout << "proportion_of_cars: " << totals[4]/100 << std::endl;
+	std::cout << "proportion_of_SUVs: " << totals[5]/100 << std::endl;
+	std::cout << "proportion_of_trucks: " << totals[6]/100 << std::endl;
+	std::cout << "proportion_right_turn_cars: " << totals[7]/100 << std::endl;
+	std::cout << "proportion_left_turn_cars: " << totals[8]/100 << std::endl;
+	std::cout << "proportion_straight_cars: " << totals[9]/100 << std::endl;
+	std::cout << "proportion_right_turn_SUVs: " << totals[10]/100 << std::endl;
+	std::cout << "proportion_left_turn_SUVs: " << totals[11]/100 << std::endl;
+	std::cout << "proportion_straight_SUVs: " << totals[12]/100 << std::endl;
+	std::cout << "proportion_right_turn_trucks: " << totals[13]/100 << std::endl;
+	std::cout << "proportion_left_turn_trucks: " << totals[14]/100 << std::endl;
+	std::cout << "proportion_straight_trucks: " << totals[15]/100 << std::endl;
 
   return 0;
 }

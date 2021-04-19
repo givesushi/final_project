@@ -1,11 +1,16 @@
-#include "VehicleBase.h"
-#include "Animator.h"
+#ifndef __DRIVER_H__
+#define __DRIVER_H__
+
+// #include "VehicleBase.h"
+// #include "Animator.h"
+#include "Counter.h"
 #include <iostream>
 #include <fstream>
 #include <random>
 using namespace std;
 
 class Driver{
+
 
   //input variables from file
   int maximum_simulated_time;
@@ -37,17 +42,29 @@ class Driver{
   double proportion_straight_trucks; //implicit
 
 
+
   //FUNCTIONS
 
 public:
+
+	// Testing proportions
+	double total_vehicles = 0;
+	double total_nb = 0;
+	double total_sb = 0;
+	double total_eb = 0;
+	double total_wb = 0;
+
   //constructor
   Driver(string infile);
   ~Driver();
 
+	void generate(uniform_real_distribution<double>& rand, mt19937& randomNumberGenerator, Counter& counter);
   //construct and add vehicles to lanes in anim
-  void generateVehicles(double rand, Animator anim);
+  void generateVehicles(double rand, Counter& counter); //, Animator anim);
 
   //run the simulation
-  void run();
+  std::vector<double> run(int seed);
 
 };
+
+#endif
