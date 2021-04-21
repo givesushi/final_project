@@ -47,9 +47,6 @@ Driver::Driver(string infile){
   proportion_straight_cars = 1 - proportion_left_turn_cars - proportion_right_turn_cars;
   proportion_straight_SUVs = 1 - proportion_left_turn_SUVs - proportion_right_turn_SUVs;
   proportion_straight_trucks = 1 - proportion_left_turn_trucks - proportion_right_turn_trucks;
-}
-
-void Driver::generateVehicles(double rand, Animator anim){
 
   //values for generating new vehicles each clock tick
   //EAST
@@ -116,6 +113,9 @@ void Driver::generateVehicles(double rand, Animator anim){
   double north_truck_r = north_truck_l + (north_truck * this->proportion_right_turn_trucks);
   double north_truck_s = north_truck_r + (north_truck * this->proportion_straight_trucks);
 
+}
+
+void Driver::generateVehicles(double rand, Animator anim){
   //Generate a new vehicle based on random number for each lane.
   //EAST
   if(rand < east_truck_s){

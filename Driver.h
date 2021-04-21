@@ -36,6 +36,59 @@ class Driver{
   double proportion_right_turn_trucks;
   double proportion_straight_trucks; //implicit
 
+  //variables for generating vehicles.
+  double east_car;
+  double east_car_l;
+  double east_car_r;
+  double east_car_s;
+  double east_SUV;
+  double east_SUV_l;
+  double east_SUV_r;
+  double east_SUV_s;
+  double east_truck;
+  double east_truck_l;
+  double east_truck_r;
+  double east_truck_s;
+
+  double west_car;
+  double west_car_l;
+  double west_car_r;
+  double west_car_s;
+  double west_SUV;
+  double west_SUV_l;
+  double west_SUV_r;
+  double west_SUV_s;
+  double west_truck;
+  double west_truck_l;
+  double west_truck_r;
+  double west_truck_s;
+
+  double south_car;
+  double south_car_l;
+  double south_car_r;
+  double south_car_s;
+  double south_SUV;
+  double south_SUV_l;
+  double south_SUV_r;
+  double south_SUV_s;
+  double south_truck;
+  double south_truck_l;
+  double south_truck_r;
+  double south_truck_s;
+
+  double north_car;
+  double north_car_l;
+  double north_car_r;
+  double north_car_s;
+  double north_SUV;
+  double north_SUV_l;
+  double north_SUV_r;
+  double north_SUV_s;
+  double north_truck;
+  double north_truck_l;
+  double north_truck_r;
+  double north_truck_s;
+
 
   //FUNCTIONS
 
