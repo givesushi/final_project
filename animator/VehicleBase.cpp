@@ -34,7 +34,9 @@ VehicleBase::VehicleBase(const VehicleBase& other)
 			len(other.len)
 {}
 
-VehicleBase::~VehicleBase() {}
+VehicleBase::~VehicleBase() {
+	std::cout << "VB Destroyed" << std::endl;
+}
 
 // VehicleBase& VehichleBase::operator=(const VehicleBase&& other){
 // 	if(other == void){

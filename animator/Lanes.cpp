@@ -175,13 +175,13 @@ void Lanes::update_entering_lanes(){
 }
 
 void Lanes::progress_lanes(bool ns_red, bool ew_red){
-	int pos = lane_len-1;
+	int pos = this->lane_len-1;
 	nb_lane[pos] = nullptr;
 	sb_lane[pos] = nullptr;
 	eb_lane[pos] = nullptr;
 	wb_lane[pos] = nullptr;
 	pos--;
-	while(pos > halfSize+1){
+	while(pos > this->halfSize+1){
 		nb_lane[pos+1] = nb_lane[pos];
 		nb_lane[pos] = nullptr;
 		sb_lane[pos+1] = sb_lane[pos];
@@ -443,7 +443,7 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 }
 
 void Lanes::new_vehicle(Direction dir, VehicleType type, Turn turn){
-	VehicleBase vb(type, dir, turn);
+	VehicleBase vb{type, dir, turn};
 	switch (dir) {
 		case Direction::north:
 			for(int i = 0; i < vb.get_len(); i++){

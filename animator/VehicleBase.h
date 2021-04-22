@@ -7,6 +7,8 @@ enum class VehicleType {car, suv, truck};
 enum class Turn 			 {right, left, straight};
 enum class LightColor  {green, yellow, red};
 
+#include <iostream>
+
 class VehicleBase
 {
    public:
@@ -17,8 +19,8 @@ class VehicleBase
       VehicleType vehicleType;
       Direction   vehicleDirection;
 			Turn 				turn;
-			bool 		turning;
-			int 	len;
+			bool 				turning;
+			int 				len;
 
    public:
       VehicleBase(VehicleType type, Direction originalDirection, Turn t);
