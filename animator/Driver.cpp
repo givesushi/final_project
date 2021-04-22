@@ -115,6 +115,8 @@ Driver::Driver(string infile){
 
 }
 
+Driver::~Driver(){}
+
 void Driver::generateVehicles(double rand, Lanes lanes){
   //Generate a new vehicle based on random number for each lane.
   //EAST
@@ -215,6 +217,7 @@ void Driver::generateVehicles(double rand, Lanes lanes){
 void Driver::run(int seed){
 
   //Animator to draw simulation
+	Animator::MAX_VEHICLE_COUNT = 999;
   Animator anim(this->number_of_sections_before_intersection);
 	Lanes    lanes(this->number_of_sections_before_intersection);
 
@@ -238,22 +241,22 @@ void Driver::run(int seed){
 		if(count_ns == 0){ ns_red = false; }
 		if(!ns_red){
 			if(count_ns == 0){
-				anim.setLightNorthSouth(Color::green);
+				anim.setLightNorthSouth(LightColor::green);
 			}else if(count_ns == green_north_south){
-				anim.setLightNorthSouth(Color::yellow);
+				anim.setLightNorthSouth(LightColor::yellow);
 			}else if(count_ns == green_north_south + yellow_north_south){
-				anim.setLightNorthSouth(Color::red);
+				anim.setLightNorthSouth(LightColor::red);
 				ns_red = true;
 				count_ew = 0;
 			} count_ns++;
 		}else{
 			if(count_ew == 0){
-				anim.setLightEastWest(Color::green);
+				anim.setLightEastWest(LightColor::green);
 				ew_red = false;
 			}else if(count_ew == green_east_west){
-				anim.setLightEastWest(Color::yellow);
+				anim.setLightEastWest(LightColor::yellow);
 			}else if(count_ew == green_east_west + yellow_east_west){
-				anim.setLightEastWest(Color::red);
+				anim.setLightEastWest(LightColor::red);
 				ew_red = true;
 				count_ns = 0;
 			} count_ew++;
@@ -290,6 +293,8 @@ void Driver::run(int seed){
 }
 
 int main(int argc, char* argv[]){
+	Driver driver(argv[1]);
 
+	driver.run(atoi(argv[2]));
   return 0;
 }

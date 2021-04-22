@@ -6,6 +6,7 @@
 #include <queue>
 #include "VehicleBase.h"
 #include "Lanes.h"
+#include <exception>
 
 using namespace std;
 
@@ -16,10 +17,15 @@ private:
 	vector<VehicleBase*> eb_lane;
 	vector<VehicleBase*> wb_lane;
 
-	queue<VehicleBase*> nb_q;
-	queue<VehicleBase*> sb_q;
-	queue<VehicleBase*> eb_q;
-	queue<VehicleBase*> wb_q;
+	// queue<VehicleBase*> nb_q;
+	// queue<VehicleBase*> sb_q;
+	// queue<VehicleBase*> eb_q;
+	// queue<VehicleBase*> wb_q;
+
+	vector<VehicleBase*> nb_q;
+	vector<VehicleBase*> sb_q;
+	vector<VehicleBase*> eb_q;
+	vector<VehicleBase*> wb_q;
 
 	bool nb_enter_busy;
 	bool sb_enter_busy;

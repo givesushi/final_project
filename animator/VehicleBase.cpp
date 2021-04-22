@@ -36,4 +36,10 @@ VehicleBase::VehicleBase(const VehicleBase& other)
 
 VehicleBase::~VehicleBase() {}
 
+// VehicleBase& VehichleBase::operator=(const VehicleBase&& other){
+// 	if(other == void){
+// 		return *this;
+// 	}
+// }
+
 #endif

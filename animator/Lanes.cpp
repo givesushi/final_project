@@ -8,15 +8,15 @@ Lanes::Lanes(int numSectionsBeforeIntersection){
 	lane_len = numSectionsBeforeIntersection*2 + 2;
 	halfSize = numSectionsBeforeIntersection;
 
-	nb_lane(lane_len, nullptr);
-	sb_lane(lane_len, nullptr);
-	eb_lane(lane_len, nullptr);
-	wb_lane(lane_len, nullptr);
-
-	nb_q();
-	sb_q();
-	eb_q();
-	wb_q();
+	// nb_lane{lane_len, nullptr};
+	// sb_lane{lane_len, nullptr};
+	// eb_lane{lane_len, nullptr};
+	// wb_lane{lane_len, nullptr};
+	//
+	// nb_q();
+	// sb_q();
+	// eb_q();
+	// wb_q();
 
 }
 
@@ -106,43 +106,43 @@ bool Lanes::check_clear_next(Direction check, int pos){
 	}
 }
 
-void Lanes::turn_right(VehicleBase& vb, Direction from){
+void Lanes::turn_right(VehicleBase* vb, Direction from){
 	switch (from) {
 		case Direction::north:
-			eb_lane[halfSize+1] = &vb;
+			eb_lane[halfSize+1] = vb;
 			nb_lane[halfSize-1] = nullptr;
 			break;
 		case Direction::south:
-			wb_lane[halfSize+1] = &vb;
+			wb_lane[halfSize+1] = vb;
 			sb_lane[halfSize-1] = nullptr;
 			break;
 		case Direction::east:
-			sb_lane[halfSize+1] = &vb;
+			sb_lane[halfSize+1] = vb;
 			eb_lane[halfSize-1] = nullptr;
 			break;
 		case Direction::west:
-			nb_lane[halfSize+1] = &vb;
+			nb_lane[halfSize+1] = vb;
 			wb_lane[halfSize-1] = nullptr;
 			break;
 	}
 }
 
-void Lanes::turn_left(VehicleBase& vb, Direction from){
+void Lanes::turn_left(VehicleBase* vb, Direction from){
 	switch (from) {
 		case Direction::north:
-			wb_lane[halfSize+1] = &vb;
+			wb_lane[halfSize+1] = vb;
 			nb_lane[halfSize+1] = nullptr;
 			break;
 		case Direction::south:
-			eb_lane[halfSize+1] = &vb;
+			eb_lane[halfSize+1] = vb;
 			sb_lane[halfSize+1] = nullptr;
 			break;
 		case Direction::east:
-			nb_lane[halfSize+1] = &vb;
+			nb_lane[halfSize+1] = vb;
 			eb_lane[halfSize+1] = nullptr;
 			break;
 		case Direction::west:
-			sb_lane[halfSize+1] = &vb;
+			sb_lane[halfSize+1] = vb;
 			wb_lane[halfSize+1] = nullptr;
 			break;
 	}
@@ -154,10 +154,24 @@ void Lanes::update_entering_lanes(){
 	eb_enter_busy = !(eb_lane[0] == nullptr);
 	wb_enter_busy = !(wb_lane[0] == nullptr);
 
-	if(!nb_enter_busy && !nb_q.empty()){ nb_lane[0] = nb_q.pop(); }
-	if(!sb_enter_busy && !sb_q.empty()){ sb_lane[0] = sb_q.pop(); }
-	if(!eb_enter_busy && !eb_q.empty()){ eb_lane[0] = eb_q.pop(); }
-	if(!wb_enter_busy && !wb_q.empty()){ wb_lane[0] = wb_q.pop(); }
+		// if(!nb_enter_busy && !nb_q.empty()){ nb_lane[0] = nb_q.pop(); }
+		// if(!sb_enter_busy && !sb_q.empty()){ sb_lane[0] = sb_q.pop(); }
+		// if(!eb_enter_busy && !eb_q.empty()){ eb_lane[0] = eb_q.pop(); }
+		// if(!wb_enter_busy && !wb_q.empty()){ wb_lane[0] = wb_q.pop(); }
+
+		if(!nb_enter_busy && !nb_q.empty()){
+			nb_lane[0] = nb_q[0];
+		 	auto it = nb_q.erase(nb_q.begin());
+		} if(!sb_enter_busy && !sb_q.empty()){
+			sb_lane[0] = sb_q[0];
+			auto it = sb_q.erase(nb_q.begin());
+		} if(!eb_enter_busy && !eb_q.empty()){
+			eb_lane[0] = eb_q[0];
+			auto it = eb_q.erase(nb_q.begin());
+		} if(!wb_enter_busy && !wb_q.empty()){
+			wb_lane[0] = wb_q[0];
+			auto it = wb_q.erase(nb_q.begin());
+		}
 }
 
 void Lanes::progress_lanes(bool ns_red, bool ew_red){
@@ -185,9 +199,9 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 
 		if(d == Direction::north){
 			Turn t = vb->getVehicleTurn();
-			if(t == Direction::left){
+			if(t == Turn::left){
 				bool turning = vb->isTurning();
-				if(turning || check_clear_left(d,vb->getVehicleLen())){
+				if(turning || check_clear_left(d,vb->get_len())){
 					turn_left(vb,d);
 				}else{} //do nothing
 			}else{
@@ -206,9 +220,9 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 
 		if(d == Direction::south){
 			Turn t = vb->getVehicleTurn();
-			if(t == Direction::left){
+			if(t == Turn::left){
 				bool turning = vb->isTurning();
-				if(turning || check_clear_left(d,vb->getVehicleLen())){
+				if(turning || check_clear_left(d,vb->get_len())){
 					turn_left(vb,d);
 				}else{} //do nothing
 			}else{
@@ -227,9 +241,9 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 
 		if(d == Direction::east){
 			Turn t = vb->getVehicleTurn();
-			if(t == Direction::left){
+			if(t == Turn::left){
 				bool turning = vb->isTurning();
-				if(turning || check_clear_left(d,vb->getVehicleLen())){
+				if(turning || check_clear_left(d,vb->get_len())){
 					turn_left(vb,d);
 				}else{} //do nothing
 			}else{
@@ -249,9 +263,9 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 
 		if(d == Direction::west){
 			Turn t = vb->getVehicleTurn();
-			if(t == Direction::left){
+			if(t == Turn::left){
 				bool turning = vb->isTurning();
-				if(turning || check_clear_left(d,vb->getVehicleLen())){
+				if(turning || check_clear_left(d,vb->get_len())){
 					turn_left(vb,d);
 				}else{} //do nothing
 			}else{
@@ -298,7 +312,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 		Direction d = vb->getVehicleOriginalDirection();
 		bool turning = vb->isTurning();
 		bool clear = check_clear_next(Direction::north, pos);
-		if(d == Direction::right){
+		Turn t = vb->getVehicleTurn();
+		if(t == Turn::right){
 			if(turning){
 				turn_right(vb, d);
 			}else if(ns_red && check_clear_right(Direction::north, vb->get_len())){
@@ -312,8 +327,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 		}else if(!ns_red && clear){
 			nb_lane[pos+1] = nb_lane[pos];
 			nb_lane[pos] = nullptr;
-			if(d == Direction::straight){
-				vb->turning();
+			if(t == Turn::straight){
+				vb->start_turn();
 			}
 		}
 	}
@@ -323,7 +338,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 		Direction d = vb->getVehicleOriginalDirection();
 		bool turning = vb->isTurning();
 		bool clear = check_clear_next(Direction::south, pos);
-		if(d == Direction::right){
+		Turn t = vb->getVehicleTurn();
+		if(t == Turn::right){
 			if(turning){
 				turn_right(vb, d);
 			}else if(ns_red && check_clear_right(Direction::south, vb->get_len())){
@@ -337,8 +353,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 		}else if(!ns_red && clear){
 			sb_lane[pos+1] = sb_lane[pos];
 			sb_lane[pos] = nullptr;
-			if(d == Direction::straight){
-				vb->turning();
+			if(t == Turn::straight){
+				vb->start_turn();
 			}
 		}
 	}
@@ -348,7 +364,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 		Direction d = vb->getVehicleOriginalDirection();
 		bool turning = vb->isTurning();
 		bool clear = check_clear_next(Direction::east, pos);
-		if(d == Direction::right){
+		Turn t = vb->getVehicleTurn();
+		if(t == Turn::right){
 			if(turning){
 				turn_right(vb, d);
 			}else if(ew_red && check_clear_right(Direction::east, vb->get_len())){
@@ -362,8 +379,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 		}else if(!ew_red && clear){
 			eb_lane[pos+1] = eb_lane[pos];
 			eb_lane[pos] = nullptr;
-			if(d == Direction::straight){
-				vb->turning();
+			if(t == Turn::straight){
+				vb->start_turn();
 			}
 		}
 	}
@@ -373,7 +390,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 		Direction d = vb->getVehicleOriginalDirection();
 		bool turning = vb->isTurning();
 		bool clear = check_clear_next(Direction::west, pos);
-		if(d == Direction::right){
+		Turn t = vb->getVehicleTurn();
+		if(t == Turn::right){
 			if(turning){
 				turn_right(vb, d);
 			}else if(ew_red && check_clear_right(Direction::west, vb->get_len())){
@@ -387,8 +405,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 		}else if(!ew_red && clear){
 			wb_lane[pos+1] = wb_lane[pos];
 			wb_lane[pos] = nullptr;
-			if(d == Direction::straight){
-				vb->turning();
+			if(t == Turn::straight){
+				vb->start_turn();
 			}
 		}
 	}
@@ -429,19 +447,23 @@ void Lanes::new_vehicle(Direction dir, VehicleType type, Turn turn){
 	switch (dir) {
 		case Direction::north:
 			for(int i = 0; i < vb.get_len(); i++){
-				nb_q.push(&vb);
+				// nb_q.push(&vb);
+				nb_q.push_back(&vb);
 			} break;
 		case Direction::south:
 			for(int i = 0; i < vb.get_len(); i++){
-				sb_q.push(&vb);
+				// sb_q.push(&vb);
+				sb_q.push_back(&vb);
 			} break;
 		case Direction::east:
 			for(int i = 0; i < vb.get_len(); i++){
-				eb_q.push(&vb);
+				// eb_q.push(&vb);
+				eb_q.push_back(&vb);
 			} break;
 		case Direction::west:
 			for(int i = 0; i < vb.get_len(); i++){
-				wb_q.push(&vb);
+				// wb_q.push(&vb);
+				wb_q.push_back(&vb);
 			} break;
 	}
 }
