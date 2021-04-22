@@ -17,19 +17,21 @@ class VehicleBase
       VehicleType vehicleType;
       Direction   vehicleDirection;
 			Turn 				turn;
+			boolean 		turning;
+			const int 	len;
 
    public:
       VehicleBase(VehicleType type, Direction originalDirection, Turn t);
       VehicleBase(const VehicleBase& other);
       ~VehicleBase();
 
-      inline int getVehicleID() const { return this->vehicleID; }
-
+      inline int 				 getVehicleID() const { return this->vehicleID; }
       inline VehicleType getVehicleType() const { return this->vehicleType; }
       inline Direction   getVehicleOriginalDirection() const { return this->vehicleDirection; }
 			inline Turn 			 getVehicleTurn() const { return this->turn; }
+			inline int 				 getVehicleLen() const { return this->len; }
+			inline boolean		 isTurning() const { return this->turning; }
 
-			virtual boolean progress(boolean red, int t_til_red, int pos);
 };
 
 #endif

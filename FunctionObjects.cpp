@@ -2,6 +2,7 @@
 #include <iostream>
 #include <stack>
 #include <vector>
+#include <queue>
 
 using namespace std;
 
@@ -17,11 +18,17 @@ int main(){
 	// stack.push(Turns::FORWARD);
 	// stack.push(Turns::FORWARD);
 
-	vector<Turns> turnVector{};
+	vector<Turns> turnVector;
+	queue<Turns> turnQueue;
+
 	turnVector.emplace_back(Turns::LEFT);
 	turnVector.emplace_back(Turns::RIGHT);
 	turnVector.emplace_back(Turns::FORWARD);
 	turnVector.emplace_back(Turns::FORWARD);
+
+	turnQueue.push(Turns::LEFT);
+	turnQueue.push(Turns::RIGHT);
+	turnQueue.push(Turns::FORWARD);
 
 	int x = 0;
 	int y = 0;
@@ -30,8 +37,10 @@ int main(){
 	function<void()> left = [x,y](){ turn_left(x,y); };
 	function<void()> forward = [&x,&y](){ x++; y++; };
 
-	// while (!stack.empty()) {
-	// 	Turns t = stack.pop();
+	cout << turnQueue.pop() << endl;
+
+	// while (!turnQueue.empty()) {
+	// 	auto t = turnQueue.pop();
 	// 	switch (t) {
 	// 		case Turns::RIGHT:
 	// 			right();
@@ -44,19 +53,19 @@ int main(){
 	// 			break;
 	// 	}
   // }
-	for(Turns t : turnVector){
-			switch (t) {
-				case Turns::RIGHT:
-					right();
-					break;
-				case Turns::LEFT:
-					left();
-					break;
-				case Turns::FORWARD:
-					forward();
-					break;
-			}
-	}
+	// for(Turns t : turnVector){
+	// 		switch (t) {
+	// 			case Turns::RIGHT:
+	// 				right();
+	// 				break;
+	// 			case Turns::LEFT:
+	// 				left();
+	// 				break;
+	// 			case Turns::FORWARD:
+	// 				forward();
+	// 				break;
+	// 		}
+	// }
 	cout << "x: " << x << ", y: " << y << endl;
 }
 
