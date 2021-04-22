@@ -232,10 +232,31 @@ void Driver::run(int seed){
 	int count_ns = 0;
 	int count_ew = 0;
 
+	char dummy;
   //main loop for the simulation
   while(clock < maximum_simulated_time){
+		if(count_ns == 0){ ns_red = false; }
 		if(!ns_red){
-			count_ns++;
+			if(count_ns == 0){
+				anim.setLightNorthSouth(Color::green);
+			}else if(count_ns == green_north_south){
+				anim.setLightNorthSouth(Color::yellow);
+			}else if(count_ns == green_north_south + yellow_north_south){
+				anim.setLightNorthSouth(Color::red);
+				ns_red = true;
+				count_ew = 0;
+			} count_ns++;
+		}else{
+			if(count_ew == 0){
+				anim.setLightEastWest(Color::green);
+				ew_red = false;
+			}else if(count_ew == green_east_west){
+				anim.setLightEastWest(Color::yellow);
+			}else if(count_ew == green_east_west + yellow_east_west){
+				anim.setLightEastWest(Color::red);
+				ew_red = true;
+				count_ns = 0;
+			} count_ew++;
 		}
 
 
@@ -254,7 +275,14 @@ void Driver::run(int seed){
       5) anim.draw()
       6) wait for input (key click), then loop
     */
+		anim.setVehiclesNorthbound(lanes.get_nb_lane());
+		anim.setVehiclesWestbound(lanes.get_wb_lane());
+		anim.setVehiclesSouthbound(lanes.get_sb_lane());
+		anim.setVehiclesEastbound(lanes.get_eb_lane());
 
+		anim.draw(clock);
+
+		cin.get(dummy);
     //iterate clock
     clock++;
   }
