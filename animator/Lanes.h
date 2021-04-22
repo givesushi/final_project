@@ -21,17 +21,17 @@ private:
 	queue<VehicleBase*> eb_q;
 	queue<VehicleBase*> wb_q;
 
-	boolean nb_enter_busy;
-	boolean sb_enter_busy;
-	boolean eb_enter_busy;
-	boolean wb_enter_busy;
+	bool nb_enter_busy;
+	bool sb_enter_busy;
+	bool eb_enter_busy;
+	bool wb_enter_busy;
 
 	int lane_len;
  	int halfSize;
 
-	boolean check_clear_left(Direction check, int vehicle_len);
-	boolean check_clear_right(Direction check, int vehicle_len);
-	boolean check_clear_next(Direction check, int pos);
+	bool check_clear_left(Direction check, int vehicle_len);
+	bool check_clear_right(Direction check, int vehicle_len);
+	bool check_clear_next(Direction check, int pos);
 
 	void turn_right(VehicleBase* vb, Direction from);
 	void turn_left(VehicleBase* vb, Direction from);
@@ -43,7 +43,7 @@ public:
 	Lanes(int numSectionsBeforeIntersection);
 	~Lanes();
 
-	void progress_lanes(boolean ns_red, boolean ew_red);
+	void progress_lanes(bool ns_red, bool ew_red);
 	void new_vehicle(Direction dir, VehicleType type, Turn turn);
 
 	inline vector<VehicleBase*> get_nb_lane() const { return this-> nb_lane; }

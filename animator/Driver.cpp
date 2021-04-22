@@ -226,8 +226,8 @@ void Driver::run(int seed){
 
   int clock = 0;
 
-	boolean ns_red = false;
-	boolean ew_red = true;
+	bool ns_red = false;
+	bool ew_red = true;
 
 	int count_ns = 0;
 	int count_ew = 0;

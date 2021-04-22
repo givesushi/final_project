@@ -1,5 +1,9 @@
+#ifndef __DRIVER_H__
+#define __DRIVER_H__
+
 #include "VehicleBase.h"
 #include "Animator.h"
+#include "Lanes.h"
 #include <iostream>
 #include <fstream>
 #include <random>
@@ -104,3 +108,5 @@ public:
   void run(int seed);
 
 };
+
+#endif

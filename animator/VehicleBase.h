@@ -17,7 +17,7 @@ class VehicleBase
       VehicleType vehicleType;
       Direction   vehicleDirection;
 			Turn 				turn;
-			boolean 		turning;
+			bool 		turning;
 			const int 	len;
 
    public:
@@ -30,7 +30,7 @@ class VehicleBase
       inline Direction   getVehicleOriginalDirection() const { return this->vehicleDirection; }
 			inline Turn 			 getVehicleTurn() const { return this->turn; }
 			inline int 				 getVehicleLen() const { return this->len; }
-			inline boolean		 isTurning() const { return this->turning; }
+			inline bool		 isTurning() const { return this->turning; }
 
 };
 

@@ -22,7 +22,7 @@ Lanes::Lanes(int numSectionsBeforeIntersection){
 
 Lanes::~Lanes(){}
 
-boolean Lanes::check_clear_left(Direction check, int vehicle_len){
+bool Lanes::check_clear_left(Direction check, int vehicle_len){
 	switch (check) {
 		case Direction::north:
 			for(int i = 0; i < vehicle_len + 1; i++){
@@ -43,7 +43,7 @@ boolean Lanes::check_clear_left(Direction check, int vehicle_len){
 	}
 }
 
-boolean Lanes::check_clear_right(Direction check, int vehicle_len){
+bool Lanes::check_clear_right(Direction check, int vehicle_len){
 	switch (check) {
 		case Direction::north:
 			for(int i = 0; i < vehicle_len + 1; i++){
@@ -64,8 +64,8 @@ boolean Lanes::check_clear_right(Direction check, int vehicle_len){
 	}
 }
 
-boolean Lanes::check_clear_next(Direction check, int pos){
-	boolean clear;
+bool Lanes::check_clear_next(Direction check, int pos){
+	bool clear;
 	switch (check) {
 		case Direction::north:
 			clear = (nb_lane[pos+1] == nullptr);
@@ -160,7 +160,7 @@ void Lanes::update_entering_lanes(){
 	if(!wb_enter_busy && !wb_q.empty()){ wb_lane[0] = wb_q.pop(); }
 }
 
-void Lanes::progress_lanes(boolean ns_red, boolean ew_red){
+void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	int pos = lane_len-1;
 	nb_lane[pos] = nullptr;
 	sb_lane[pos] = nullptr;
@@ -186,7 +186,7 @@ void Lanes::progress_lanes(boolean ns_red, boolean ew_red){
 		if(d == Direction::north){
 			Turn t = vb->getVehicleTurn();
 			if(t == Direction::left){
-				boolean turning = vb->isTurning();
+				bool turning = vb->isTurning();
 				if(turning || check_clear_left(d,vb->getVehicleLen())){
 					turn_left(vb,d);
 				}else{} //do nothing
@@ -207,7 +207,7 @@ void Lanes::progress_lanes(boolean ns_red, boolean ew_red){
 		if(d == Direction::south){
 			Turn t = vb->getVehicleTurn();
 			if(t == Direction::left){
-				boolean turning = vb->isTurning();
+				bool turning = vb->isTurning();
 				if(turning || check_clear_left(d,vb->getVehicleLen())){
 					turn_left(vb,d);
 				}else{} //do nothing
@@ -228,7 +228,7 @@ void Lanes::progress_lanes(boolean ns_red, boolean ew_red){
 		if(d == Direction::east){
 			Turn t = vb->getVehicleTurn();
 			if(t == Direction::left){
-				boolean turning = vb->isTurning();
+				bool turning = vb->isTurning();
 				if(turning || check_clear_left(d,vb->getVehicleLen())){
 					turn_left(vb,d);
 				}else{} //do nothing
@@ -250,7 +250,7 @@ void Lanes::progress_lanes(boolean ns_red, boolean ew_red){
 		if(d == Direction::west){
 			Turn t = vb->getVehicleTurn();
 			if(t == Direction::left){
-				boolean turning = vb->isTurning();
+				bool turning = vb->isTurning();
 				if(turning || check_clear_left(d,vb->getVehicleLen())){
 					turn_left(vb,d);
 				}else{} //do nothing
@@ -296,8 +296,8 @@ void Lanes::progress_lanes(boolean ns_red, boolean ew_red){
 	if(nb_lane[pos] != nullptr){
 		VehicleBase* vb = nb_lane[pos];
 		Direction d = vb->getVehicleOriginalDirection();
-		boolean turning = vb->isTurning();
-		boolean clear = check_clear_next(Direction::north, pos);
+		bool turning = vb->isTurning();
+		bool clear = check_clear_next(Direction::north, pos);
 		if(d == Direction::right){
 			if(turning){
 				turn_right(vb, d);
@@ -321,8 +321,8 @@ void Lanes::progress_lanes(boolean ns_red, boolean ew_red){
 	if(sb_lane[pos] != nullptr){
 		VehicleBase* vb = sb_lane[pos];
 		Direction d = vb->getVehicleOriginalDirection();
-		boolean turning = vb->isTurning();
-		boolean clear = check_clear_next(Direction::south, pos);
+		bool turning = vb->isTurning();
+		bool clear = check_clear_next(Direction::south, pos);
 		if(d == Direction::right){
 			if(turning){
 				turn_right(vb, d);
@@ -346,8 +346,8 @@ void Lanes::progress_lanes(boolean ns_red, boolean ew_red){
 	if(eb_lane[pos] != nullptr){
 		VehicleBase* vb = eb_lane[pos];
 		Direction d = vb->getVehicleOriginalDirection();
-		boolean turning = vb->isTurning();
-		boolean clear = check_clear_next(Direction::east, pos);
+		bool turning = vb->isTurning();
+		bool clear = check_clear_next(Direction::east, pos);
 		if(d == Direction::right){
 			if(turning){
 				turn_right(vb, d);
@@ -371,8 +371,8 @@ void Lanes::progress_lanes(boolean ns_red, boolean ew_red){
 	if(wb_lane[pos] != nullptr){
 		VehicleBase* vb = wb_lane[pos];
 		Direction d = vb->getVehicleOriginalDirection();
-		boolean turning = vb->isTurning();
-		boolean clear = check_clear_next(Direction::west, pos);
+		bool turning = vb->isTurning();
+		bool clear = check_clear_next(Direction::west, pos);
 		if(d == Direction::right){
 			if(turning){
 				turn_right(vb, d);
