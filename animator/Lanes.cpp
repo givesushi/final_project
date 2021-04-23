@@ -1,4 +1,6 @@
+#define CATCH_CONFIG_MAIN
 #include "Lanes.h"
+#include "Catch.hpp"
 
 Lanes::Lanes(int numSectionsBeforeIntersection){
 	nb_enter_busy = false;
