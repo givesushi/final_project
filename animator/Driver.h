@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <random>
+#include <memory>
 using namespace std;
 
 class Driver{

@@ -12,20 +12,25 @@ using namespace std;
 
 class Lanes{
 private:
-	vector<VehicleBase*> nb_lane;
-	vector<VehicleBase*> sb_lane;
-	vector<VehicleBase*> eb_lane;
-	vector<VehicleBase*> wb_lane;
+	// vector<VehicleBase*> nb_lane;
+	// vector<VehicleBase*> sb_lane;
+	// vector<VehicleBase*> eb_lane;
+	// vector<VehicleBase*> wb_lane;
+
+	vector<shared_ptr<VehicleBase>> nb_lane;
+	vector<shared_ptr<VehicleBase>> sb_lane;
+	vector<shared_ptr<VehicleBase>> eb_lane;
+	vector<shared_ptr<VehicleBase>> wb_lane;
 
 	// queue<VehicleBase*> nb_q;
 	// queue<VehicleBase*> sb_q;
 	// queue<VehicleBase*> eb_q;
 	// queue<VehicleBase*> wb_q;
 
-	vector<VehicleBase*> nb_q;
-	vector<VehicleBase*> sb_q;
-	vector<VehicleBase*> eb_q;
-	vector<VehicleBase*> wb_q;
+	vector<shared_ptr<VehicleBase>> nb_q;
+	vector<shared_ptr<VehicleBase>> sb_q;
+	vector<shared_ptr<VehicleBase>> eb_q;
+	vector<shared_ptr<VehicleBase>> wb_q;
 
 	bool nb_enter_busy;
 	bool sb_enter_busy;
@@ -39,8 +44,8 @@ private:
 	bool check_clear_right(Direction check, int vehicle_len);
 	bool check_clear_next(Direction check, int pos);
 
-	void turn_right(VehicleBase* vb, Direction from);
-	void turn_left(VehicleBase* vb, Direction from);
+	void turn_right(weak_ptr<VehicleBase> vb, Direction from);
+	void turn_left(weak_ptr<VehicleBase> vb, Direction from);
 
 	void update_entering_lanes();
 
