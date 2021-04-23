@@ -117,31 +117,31 @@ Driver::Driver(string infile){
 
 Driver::~Driver(){}
 
-VehicleBase Driver::generateVehicles(double rand){
+VehicleBase* Driver::generateVehicles(double rand){
   //Generate a new vehicle based on random number for each lane.
   //EAST
   if(rand < east_truck_s){
     if(rand < east_car_l){
-      return VehicleBase(VehicleType::car, Direction::east, Turn::left);
+      return new VehicleBase(VehicleType::car, Direction::east, Turn::left);
     }else if(rand < east_car_r){
-			return VehicleBase(VehicleType::car, Direction::east, Turn::right);
+			return new VehicleBase(VehicleType::car, Direction::east, Turn::right);
     }else if(rand < east_car_s){
-			return VehicleBase(VehicleType::car, Direction::east, Turn::straight);
+			return new VehicleBase(VehicleType::car, Direction::east, Turn::straight);
     }else if(rand < east_SUV_l){
-			return VehicleBase(VehicleType::suv, Direction::east, Turn::left);
+			return new VehicleBase(VehicleType::suv, Direction::east, Turn::left);
     }else if(rand < east_SUV_r){
-			return VehicleBase(VehicleType::suv, Direction::east, Turn::right);
+			return new VehicleBase(VehicleType::suv, Direction::east, Turn::right);
     }else if(rand < east_SUV_s){
-			return VehicleBase(VehicleType::suv, Direction::east, Turn::straight);
+			return new VehicleBase(VehicleType::suv, Direction::east, Turn::straight);
     }else if(rand < east_truck_l){
-			return VehicleBase(VehicleType::truck, Direction::east, Turn::left);
+			return new VehicleBase(VehicleType::truck, Direction::east, Turn::left);
     }else if(rand < east_truck_r){
-			return VehicleBase(VehicleType::truck, Direction::east, Turn::right);
+			return new VehicleBase(VehicleType::truck, Direction::east, Turn::right);
     }else{
-			return VehicleBase(VehicleType::truck, Direction::east, Turn::straight);
+			return new VehicleBase{VehicleType::truck, Direction::east, Turn::straight};
     }
   } else{
-		return VehicleBase(VehicleType::car, Direction::east, Turn::right);
+		return new VehicleBase{VehicleType::car, Direction::east, Turn::right};
 	}
 
   //WEST
@@ -317,6 +317,7 @@ int main(int argc, char* argv[]){
 	int count_ew = 0;
 
 	int max_t = driver.return_max_time();
+	VehicleBase* vb_new;
 
 	char dummy;
   //main loop for the simulation
@@ -349,8 +350,8 @@ int main(int argc, char* argv[]){
 
     rand = rand_double(randomNumberGenerator);
 
-    VehicleBase vb = driver.generateVehicles(rand);
-		lanes.assign_vehicle(&vb);
+    vb_new = driver.generateVehicles(rand);
+		lanes.assign_vehicle(vb_new);
 
 
 		lanes.progress_lanes(ns_red, ew_red);
