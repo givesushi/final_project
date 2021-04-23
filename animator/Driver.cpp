@@ -293,8 +293,11 @@ void Driver::run(int seed){
 }
 
 int main(int argc, char* argv[]){
-	Driver driver{argv[1]};
+	// Driver driver{argv[1]};
 
-	driver.run(stoi(argv[2]));
+	// driver.run(stoi(argv[2]));
+
+	Lanes l(5);
+	l.new_vehicle(Direction::south, VehicleType::suv, Turn::straight);
   return 0;
 }
