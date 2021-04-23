@@ -1,5 +1,5 @@
-EXECS = testAnimator
-OBJS = testAnimator.o Animator.o VehicleBase.o
+EXECS = simulate
+OBJS = Lanes.o Driver.o Animator.o VehicleBase.o
 
 #### use next two lines for Mac
 CC = clang++
@@ -11,7 +11,7 @@ CCFLAGS = -std=c++11 -stdlib=libc++
 
 all: $(EXECS)
 
-testAnimator: $(OBJS)
+simulate: $(OBJS)
 	$(CC) $(CCFLAGS) $^ -o $@
 
 %.o: %.cpp *.h
