@@ -50,7 +50,8 @@ public:
 	~Lanes();
 
 	void progress_lanes(bool ns_red, bool ew_red);
-	void new_vehicle(Direction dir, VehicleType type, Turn turn);
+	// void new_vehicle(Direction dir, VehicleType type, Turn turn);
+	void assign_vehicle(VehicleBase* vb);
 
 	inline vector<VehicleBase*> get_nb_lane() const { return this-> nb_lane; }
 	inline vector<VehicleBase*> get_sb_lane() const { return this-> sb_lane; }

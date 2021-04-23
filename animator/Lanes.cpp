@@ -442,28 +442,54 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	update_entering_lanes();
 }
 
-void Lanes::new_vehicle(Direction dir, VehicleType type, Turn turn){
-	VehicleBase vb{type, dir, turn};
-	switch (dir) {
+// void Lanes::new_vehicle(Direction dir, VehicleType type, Turn turn){
+// 	VehicleBase vb{type, dir, turn};
+// 	switch (dir) {
+// 		case Direction::north:
+// 			for(int i = 0; i < vb.get_len(); i++){
+// 				// nb_q.push(&vb);
+// 				nb_q.push_back(&vb);
+// 			} break;
+// 		case Direction::south:
+// 			for(int i = 0; i < vb.get_len(); i++){
+// 				// sb_q.push(&vb);
+// 				sb_q.push_back(&vb);
+// 			} break;
+// 		case Direction::east:
+// 			for(int i = 0; i < vb.get_len(); i++){
+// 				// eb_q.push(&vb);
+// 				eb_q.push_back(&vb);
+// 			} break;
+// 		case Direction::west:
+// 			for(int i = 0; i < vb.get_len(); i++){
+// 				// wb_q.push(&vb);
+// 				wb_q.push_back(&vb);
+// 			} break;
+// 	}
+// }
+
+void Lanes::assign_vehicle(VehicleBase* vb){
+
+	switch (vb->getVehicleOriginalDirection()) {
 		case Direction::north:
-			for(int i = 0; i < vb.get_len(); i++){
+			for(int i = 0; i < vb->get_len(); i++){
 				// nb_q.push(&vb);
-				nb_q.push_back(&vb);
+				nb_q.push_back(vb);
 			} break;
 		case Direction::south:
-			for(int i = 0; i < vb.get_len(); i++){
+			for(int i = 0; i < vb->get_len(); i++){
 				// sb_q.push(&vb);
-				sb_q.push_back(&vb);
+				sb_q.push_back(vb);
 			} break;
 		case Direction::east:
-			for(int i = 0; i < vb.get_len(); i++){
+			for(int i = 0; i < vb->get_len(); i++){
 				// eb_q.push(&vb);
-				eb_q.push_back(&vb);
+				eb_q.push_back(vb);
 			} break;
 		case Direction::west:
-			for(int i = 0; i < vb.get_len(); i++){
+			for(int i = 0; i < vb->get_len(); i++){
 				// wb_q.push(&vb);
-				wb_q.push_back(&vb);
+				wb_q.push_back(vb);
 			} break;
 	}
 }

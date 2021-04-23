@@ -102,8 +102,14 @@ public:
   ~Driver();
 
   //construct and add vehicles to lanes in anim
-  void generateVehicles(double rand, Lanes& lanes);
+  VehicleBase generateVehicles(double rands);
 
+	inline int return_halfsize() { return this->number_of_sections_before_intersection; }
+	inline int return_max_time() { return this->maximum_simulated_time; }
+	inline int return_green_north_south() { return this->green_north_south; }
+	inline int return_yellow_north_south() { return this->yellow_north_south; }
+	inline int return_green_east_west() { return this->green_east_west; }
+	inline int return_yellow_east_west() { return this->yellow_east_west; }
   //run the simulation
   void run(int seed);
 
