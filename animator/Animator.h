@@ -3,7 +3,10 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include "VehicleBase.h"
+
+using namespace std;
 
 //==========================================================================
 //* class Animator
@@ -21,7 +24,7 @@
 //*
 //* Usage:
 //*   - construct an instance of Animator, passing the number of sections
-//*     prior to the intersection (e.g., 8 will result in a lane of 
+//*     prior to the intersection (e.g., 8 will result in a lane of
 //*     (8*2) + 2 = 18 sections)
 //*   - construct four std::vector<VehicleBase*>, one for each direction
 //*     of westbound, easbound, southbound, and northbound
@@ -39,7 +42,7 @@
 //*        - call each of setVehiclesNorthbound, setVehiclesSouthbound,
 //*          setVehiclesEastbound, and setVehiclesWestbound, passing the
 //*          corresponding std::vector<VehicleBase*>
-//*        - if appropriate, call setLightEastWest and setLightNorthSouth passing 
+//*        - if appropriate, call setLightEastWest and setLightNorthSouth passing
 //*          the updated color
 //*        - call draw(), passing in the value of the simulation time clock
 //*
@@ -49,7 +52,7 @@
 //*   - changed coloring so that originally east/west-bound vehicles are colored
 //*     via background and originally nort/south-bound vehicles are colored via
 //*     foreground
-//*   - added capability for traffic lights display (north/south lights are 
+//*   - added capability for traffic lights display (north/south lights are
 //*     identical, as are east/west lights)
 //==========================================================================
 
@@ -59,7 +62,7 @@ class Animator
       static int         DIGITS_TO_DRAW;
       static std::string SECTION_BOUNDARY_EW;
       static std::string EMPTY_SECTION;
-      
+
       static const std::string SECTION_BOUNDARY_NS;
       static const std::string ERROR_MSG;
 
@@ -79,7 +82,7 @@ class Animator
       std::vector<bool> vehiclesAreSet;  // 0:north 1:west 2:south 3:east
       int numSectionsBefore;
 
-      std::string getVehicleColor(VehicleBase* vptr);
+      std::string getVehicleColor(shared_ptr<VehicleBase> vptr);
       std::string createLight(LightColor color);
       std::string getTrafficLight(Direction direction);
 
@@ -92,10 +95,10 @@ class Animator
       LightColor northSouthLightColor;
       LightColor eastWestLightColor;
 
-      std::vector<VehicleBase*> eastToWest;
-      std::vector<VehicleBase*> westToEast;
-      std::vector<VehicleBase*> northToSouth;
-      std::vector<VehicleBase*> southToNorth;
+      std::vector<shared_ptr<VehicleBase>> eastToWest;
+      std::vector<shared_ptr<VehicleBase>> westToEast;
+      std::vector<shared_ptr<VehicleBase>> northToSouth;
+      std::vector<shared_ptr<VehicleBase>> southToNorth;
 
    public:
       static int MAX_VEHICLE_COUNT;
@@ -108,13 +111,13 @@ class Animator
       inline void setLightEastWest(LightColor color)
             { eastWestLightColor = color; }
 
-      inline void setVehiclesNorthbound(std::vector<VehicleBase*> vehicles)
+      inline void setVehiclesNorthbound(std::vector<shared_ptr<VehicleBase>> vehicles)
             { southToNorth = vehicles;  vehiclesAreSet[0] = true; }
-      inline void setVehiclesWestbound(std::vector<VehicleBase*> vehicles)
+      inline void setVehiclesWestbound(std::vector<shared_ptr<VehicleBase>> vehicles)
             { eastToWest   = vehicles;  vehiclesAreSet[1] = true; }
-      inline void setVehiclesSouthbound(std::vector<VehicleBase*> vehicles)
+      inline void setVehiclesSouthbound(std::vector<shared_ptr<VehicleBase>> vehicles)
             { northToSouth = vehicles;  vehiclesAreSet[2] = true; }
-      inline void setVehiclesEastbound(std::vector<VehicleBase*> vehicles)
+      inline void setVehiclesEastbound(std::vector<shared_ptr<VehicleBase>> vehicles)
             { westToEast   = vehicles;  vehiclesAreSet[3] = true; }
 
 

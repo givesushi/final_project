@@ -5,8 +5,8 @@
 #include <iostream>
 #include <queue>
 #include "VehicleBase.h"
-#include "Lanes.h"
 #include <exception>
+#include <memory>
 
 using namespace std;
 
@@ -44,8 +44,8 @@ private:
 	bool check_clear_right(Direction check, int vehicle_len);
 	bool check_clear_next(Direction check, int pos);
 
-	void turn_right(weak_ptr<VehicleBase> vb, Direction from);
-	void turn_left(weak_ptr<VehicleBase> vb, Direction from);
+	void turn_right(shared_ptr<VehicleBase> vb, Direction from);
+	void turn_left(shared_ptr<VehicleBase> vb, Direction from);
 
 	void update_entering_lanes();
 
@@ -57,10 +57,10 @@ public:
 	void progress_lanes(bool ns_red, bool ew_red);
 	void new_vehicle(Direction dir, VehicleType type, Turn turn);
 
-	inline vector<VehicleBase*> get_nb_lane() const { return this-> nb_lane; }
-	inline vector<VehicleBase*> get_sb_lane() const { return this-> sb_lane; }
-	inline vector<VehicleBase*> get_eb_lane() const { return this-> eb_lane; }
-	inline vector<VehicleBase*> get_wb_lane() const { return this-> wb_lane; }
+	inline vector<shared_ptr<VehicleBase>> get_nb_lane() { return this-> nb_lane; }
+	inline vector<shared_ptr<VehicleBase>> get_sb_lane() { return this-> sb_lane; }
+	inline vector<shared_ptr<VehicleBase>> get_eb_lane() { return this-> eb_lane; }
+	inline vector<shared_ptr<VehicleBase>> get_wb_lane() { return this-> wb_lane; }
 
 };
 

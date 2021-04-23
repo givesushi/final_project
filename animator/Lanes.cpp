@@ -106,7 +106,7 @@ bool Lanes::check_clear_next(Direction check, int pos){
 	}
 }
 
-void Lanes::turn_right(VehicleBase* vb, Direction from){
+void Lanes::turn_right(shared_ptr<VehicleBase> vb, Direction from){
 	switch (from) {
 		case Direction::north:
 			eb_lane[halfSize+1] = vb;
@@ -127,7 +127,7 @@ void Lanes::turn_right(VehicleBase* vb, Direction from){
 	}
 }
 
-void Lanes::turn_left(VehicleBase* vb, Direction from){
+void Lanes::turn_left(shared_ptr<VehicleBase> vb, Direction from){
 	switch (from) {
 		case Direction::north:
 			wb_lane[halfSize+1] = vb;
@@ -194,7 +194,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	} 																		// now at left turn spot
 	// left turn spot for nb
 	if(nb_lane[pos] != nullptr){
-		VehicleBase* vb = nb_lane[pos];
+		weak_ptr<VehicleBase> w_ptr = nb_lane[pos];
+		shared_ptr<VehicleBase> vb = w_ptr.lock();
 		Direction d = vb->getVehicleOriginalDirection();
 
 		if(d == Direction::north){
@@ -215,7 +216,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	}
 	// left turn spot for sb
 	if(sb_lane[pos] != nullptr){
-		VehicleBase* vb = sb_lane[pos];
+		weak_ptr<VehicleBase> w_ptr = sb_lane[pos];
+		shared_ptr<VehicleBase> vb = w_ptr.lock();
 		Direction d = vb->getVehicleOriginalDirection();
 
 		if(d == Direction::south){
@@ -236,7 +238,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	}
 	// left turn spot for eb
 	if(eb_lane[pos] != nullptr){
-		VehicleBase* vb = eb_lane[pos];
+		weak_ptr<VehicleBase> w_ptr = eb_lane[pos];
+		shared_ptr<VehicleBase> vb = w_ptr.lock();
 		Direction d = vb->getVehicleOriginalDirection();
 
 		if(d == Direction::east){
@@ -258,7 +261,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 
 	// left turn spot for wb
 	if(wb_lane[pos] != nullptr){
-		VehicleBase* vb = wb_lane[pos];
+		weak_ptr<VehicleBase> w_ptr = wb_lane[pos];
+		shared_ptr<VehicleBase> vb = w_ptr.lock();
 		Direction d = vb->getVehicleOriginalDirection();
 
 		if(d == Direction::west){
@@ -308,7 +312,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	pos--; // now at right turn check
 
 	if(nb_lane[pos] != nullptr){
-		VehicleBase* vb = nb_lane[pos];
+		weak_ptr<VehicleBase> w_ptr = nb_lane[pos];
+		shared_ptr<VehicleBase> vb = w_ptr.lock();
 		Direction d = vb->getVehicleOriginalDirection();
 		bool turning = vb->isTurning();
 		bool clear = check_clear_next(Direction::north, pos);
@@ -334,7 +339,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	}
 	// sb right turn check
 	if(sb_lane[pos] != nullptr){
-		VehicleBase* vb = sb_lane[pos];
+		weak_ptr<VehicleBase> w_ptr = sb_lane[pos];
+		shared_ptr<VehicleBase> vb = w_ptr.lock();
 		Direction d = vb->getVehicleOriginalDirection();
 		bool turning = vb->isTurning();
 		bool clear = check_clear_next(Direction::south, pos);
@@ -360,7 +366,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	}
 	// eb right turn check
 	if(eb_lane[pos] != nullptr){
-		VehicleBase* vb = eb_lane[pos];
+		weak_ptr<VehicleBase> w_ptr = eb_lane[pos];
+		shared_ptr<VehicleBase> vb = w_ptr.lock();
 		Direction d = vb->getVehicleOriginalDirection();
 		bool turning = vb->isTurning();
 		bool clear = check_clear_next(Direction::east, pos);
@@ -386,7 +393,8 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	}
 	// wb right turn check
 	if(wb_lane[pos] != nullptr){
-		VehicleBase* vb = wb_lane[pos];
+		weak_ptr<VehicleBase> w_ptr = wb_lane[pos];
+		shared_ptr<VehicleBase> vb = w_ptr.lock();
 		Direction d = vb->getVehicleOriginalDirection();
 		bool turning = vb->isTurning();
 		bool clear = check_clear_next(Direction::west, pos);
@@ -443,27 +451,28 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 }
 
 void Lanes::new_vehicle(Direction dir, VehicleType type, Turn turn){
-	VehicleBase vb{type, dir, turn};
+	// VehicleBase vb{type, dir, turn};
+	shared_ptr<VehicleBase> vb = make_shared<VehicleBase>(type,dir,turn);
 	switch (dir) {
 		case Direction::north:
-			for(int i = 0; i < vb.get_len(); i++){
+			for(int i = 0; i < vb->get_len(); i++){
 				// nb_q.push(&vb);
-				nb_q.push_back(&vb);
+				nb_q.push_back(vb);
 			} break;
 		case Direction::south:
-			for(int i = 0; i < vb.get_len(); i++){
+			for(int i = 0; i < vb->get_len(); i++){
 				// sb_q.push(&vb);
-				sb_q.push_back(&vb);
+				sb_q.push_back(vb);
 			} break;
 		case Direction::east:
-			for(int i = 0; i < vb.get_len(); i++){
+			for(int i = 0; i < vb->get_len(); i++){
 				// eb_q.push(&vb);
-				eb_q.push_back(&vb);
+				eb_q.push_back(vb);
 			} break;
 		case Direction::west:
-			for(int i = 0; i < vb.get_len(); i++){
+			for(int i = 0; i < vb->get_len(); i++){
 				// wb_q.push(&vb);
-				wb_q.push_back(&vb);
+				wb_q.push_back(vb);
 			} break;
 	}
 }
