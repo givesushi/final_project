@@ -9,6 +9,16 @@ Driver::~Driver(){
 
 }
 
+bool Driver::coordinate_map_contains(pair<int,int> key){
+        try{
+                int id = this->coordinate_ID_map.at(key);
+                return true;
+        }catch(out_of_range e){
+                return false;
+        }
+
+}
+
 void Driver::new_vehicle(VehicleType type, Direction originalDirection, Turn turn){
 	VehicleBase vb{type, originalDirection, turn};
 	auto out = this->ID_VehicleBase_map.try_emplace(vb.getVehicleID(),vb);
@@ -17,7 +27,7 @@ void Driver::new_vehicle(VehicleType type, Direction originalDirection, Turn tur
 	// cout << "Direction : " << direction << endl;
 	pair<int,int> coordinate(0,direction);
 	int i = 0;
-	while(this->coordinate_ID_map.contains(coordinate)){
+	while(coordinate_map_contains(coordinate)){
 		i--;
 		coordinate = make_pair(i,direction);
 	}
@@ -36,7 +46,7 @@ pair<int,int> Driver::closed_addition(pair<int,int> v1, pair<int,int> v2){
 
 bool Driver::check_clear(pair<int,int> pos, pair<int,int> vec){
 	auto check = closed_addition(pos,vec);
-	bool out = !(this->coordinate_ID_map.contains(check));
+	bool out = !(coordinate_map_contains(check));
 	cout << "CHECKING POS:" << endl;
 	cout << "From: (" << to_string(get<0>(pos)) << "," << to_string(get<1>(pos)) << ")->(" << to_string(get<0>(check)) << "," << to_string(get<1>(check)) << ") check: " << out << endl;
 	return out;
