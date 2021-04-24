@@ -21,7 +21,7 @@
 //*
 //* Usage:
 //*   - construct an instance of Animator, passing the number of sections
-//*     prior to the intersection (e.g., 8 will result in a lane of 
+//*     prior to the intersection (e.g., 8 will result in a lane of
 //*     (8*2) + 2 = 18 sections)
 //*   - construct four std::vector<VehicleBase*>, one for each direction
 //*     of westbound, easbound, southbound, and northbound
@@ -39,7 +39,7 @@
 //*        - call each of setVehiclesNorthbound, setVehiclesSouthbound,
 //*          setVehiclesEastbound, and setVehiclesWestbound, passing the
 //*          corresponding std::vector<VehicleBase*>
-//*        - if appropriate, call setLightEastWest and setLightNorthSouth passing 
+//*        - if appropriate, call setLightEastWest and setLightNorthSouth passing
 //*          the updated color
 //*        - call draw(), passing in the value of the simulation time clock
 //*
@@ -49,7 +49,7 @@
 //*   - changed coloring so that originally east/west-bound vehicles are colored
 //*     via background and originally nort/south-bound vehicles are colored via
 //*     foreground
-//*   - added capability for traffic lights display (north/south lights are 
+//*   - added capability for traffic lights display (north/south lights are
 //*     identical, as are east/west lights)
 //==========================================================================
 
@@ -59,7 +59,7 @@ class Animator
       static int         DIGITS_TO_DRAW;
       static std::string SECTION_BOUNDARY_EW;
       static std::string EMPTY_SECTION;
-      
+
       static const std::string SECTION_BOUNDARY_NS;
       static const std::string ERROR_MSG;
 
@@ -117,7 +117,7 @@ class Animator
       inline void setVehiclesEastbound(std::vector<VehicleBase*> vehicles)
             { westToEast   = vehicles;  vehiclesAreSet[3] = true; }
 
-
+			//LightColor getColor();
       void draw(int time);
 };
 
