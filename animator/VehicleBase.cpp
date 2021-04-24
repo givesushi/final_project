@@ -35,7 +35,7 @@ VehicleBase::VehicleBase(const VehicleBase& other)
 {}
 
 VehicleBase::~VehicleBase() {
-	std::cout << "VB Destroyed" << std::endl;
+	std::cout << "VB Destroyed " << this << std::endl;
 }
 
 // VehicleBase& VehichleBase::operator=(const VehicleBase&& other){

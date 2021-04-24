@@ -10,7 +10,7 @@
 using namespace std;
 
 class Driver{
-
+public:
   //input variables from file
   int maximum_simulated_time;
   int number_of_sections_before_intersection;
@@ -96,13 +96,12 @@ class Driver{
 
   //FUNCTIONS
 
-public:
   //constructor
   Driver(string infile);
   ~Driver();
 
   //construct and add vehicles to lanes in anim
-  VehicleBase* generateVehicles(double rands);
+  VehicleBase generateVehicles(double rands);
 
 	inline int return_halfsize() { return this->number_of_sections_before_intersection; }
 	inline int return_max_time() { return this->maximum_simulated_time; }

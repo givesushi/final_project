@@ -1,6 +1,4 @@
-#define CATCH_CONFIG_MAIN
 #include "Lanes.h"
-#include "Catch.hpp"
 
 Lanes::Lanes(int numSectionsBeforeIntersection){
 	nb_enter_busy = false;
@@ -10,19 +8,21 @@ Lanes::Lanes(int numSectionsBeforeIntersection){
 	lane_len = numSectionsBeforeIntersection*2 + 2;
 	halfSize = numSectionsBeforeIntersection;
 
-	// nb_lane{lane_len, nullptr};
-	// sb_lane{lane_len, nullptr};
-	// eb_lane{lane_len, nullptr};
-	// wb_lane{lane_len, nullptr};
-	//
-	// nb_q();
-	// sb_q();
-	// eb_q();
-	// wb_q();
+	nb_lane.resize(lane_len, nullptr);
+	sb_lane.resize(lane_len, nullptr);
+	eb_lane.resize(lane_len, nullptr);
+	wb_lane.resize(lane_len, nullptr);
+
+	nb_q.resize(999, nullptr);
+	sb_q.resize(999, nullptr);
+	eb_q.resize(999, nullptr);
+	wb_q.resize(999, nullptr);
 
 }
 
-Lanes::~Lanes(){}
+Lanes::~Lanes(){
+	cout << "Lanes destroyed" << endl;
+}
 
 bool Lanes::check_clear_left(Direction check, int vehicle_len){
 	switch (check) {
@@ -163,7 +163,14 @@ void Lanes::update_entering_lanes(){
 
 		if(!nb_enter_busy && !nb_q.empty()){
 			nb_lane[0] = nb_q[0];
-		 	auto it = nb_q.erase(nb_q.begin());
+		 	for(int i = 0; i < nb_q.size() - 1; i++){
+				if(nb_q[i+1] != nullptr)
+					nb_q[i] = nb_q[i+1];
+				else{
+					break;
+				}
+			}
+
 		} if(!sb_enter_busy && !sb_q.empty()){
 			sb_lane[0] = sb_q[0];
 			auto it = sb_q.erase(nb_q.begin());
@@ -205,7 +212,7 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 				bool turning = vb->isTurning();
 				if(turning || check_clear_left(d,vb->get_len())){
 					turn_left(vb,d);
-				}else{} //do nothing
+				}
 			}else{
 				nb_lane[pos+1] = vb;
 				nb_lane[pos] = nullptr;
@@ -226,7 +233,7 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 				bool turning = vb->isTurning();
 				if(turning || check_clear_left(d,vb->get_len())){
 					turn_left(vb,d);
-				}else{} //do nothing
+				}
 			}else{
 				sb_lane[pos+1] = vb;
 				sb_lane[pos] = nullptr;
@@ -238,22 +245,22 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	}
 	// left turn spot for eb
 	if(eb_lane[pos] != nullptr){
-		VehicleBase* vb = eb_lane[pos];
-		Direction d = vb->getVehicleOriginalDirection();
+		//VehicleBase* vb = eb_lane[pos];
+		Direction d = eb_lane[pos]->getVehicleOriginalDirection();
 
 		if(d == Direction::east){
-			Turn t = vb->getVehicleTurn();
+			Turn t = eb_lane[pos]->getVehicleTurn();
 			if(t == Turn::left){
-				bool turning = vb->isTurning();
-				if(turning || check_clear_left(d,vb->get_len())){
-					turn_left(vb,d);
+				bool turning = eb_lane[pos]->isTurning();
+				if(turning || check_clear_left(d,eb_lane[pos]->get_len())){
+					turn_left(eb_lane[pos],d);
 				}else{} //do nothing
 			}else{
-				eb_lane[pos+1] = vb;
+				eb_lane[pos+1] = eb_lane[pos];
 				eb_lane[pos] = nullptr;
 			}
 		}else{
-			eb_lane[pos+1] = vb;
+			eb_lane[pos+1] = eb_lane[pos];
 			eb_lane[pos] = nullptr;
 		}
 	}
@@ -444,54 +451,47 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	update_entering_lanes();
 }
 
-// void Lanes::new_vehicle(Direction dir, VehicleType type, Turn turn){
-// 	VehicleBase vb{type, dir, turn};
-// 	switch (dir) {
-// 		case Direction::north:
-// 			for(int i = 0; i < vb.get_len(); i++){
-// 				// nb_q.push(&vb);
-// 				nb_q.push_back(&vb);
-// 			} break;
-// 		case Direction::south:
-// 			for(int i = 0; i < vb.get_len(); i++){
-// 				// sb_q.push(&vb);
-// 				sb_q.push_back(&vb);
-// 			} break;
-// 		case Direction::east:
-// 			for(int i = 0; i < vb.get_len(); i++){
-// 				// eb_q.push(&vb);
-// 				eb_q.push_back(&vb);
-// 			} break;
-// 		case Direction::west:
-// 			for(int i = 0; i < vb.get_len(); i++){
-// 				// wb_q.push(&vb);
-// 				wb_q.push_back(&vb);
-// 			} break;
-// 	}
-// }
-
-void Lanes::assign_vehicle(VehicleBase* vb){
+void Lanes::new_vehicle(VehicleBase* vb){
 
 	switch (vb->getVehicleOriginalDirection()) {
+
 		case Direction::north:
-			for(int i = 0; i < vb->get_len(); i++){
-				// nb_q.push(&vb);
-				nb_q.push_back(vb);
+			for(int j = 0; j < nb_q.size(); j++){
+				if(nb_q[j] == nullptr){
+					for(int i = j; i < j + vb->get_len(); i++){
+						nb_q[i] = vb;
+					}return;
+				}
 			} break;
+
+
 		case Direction::south:
-			for(int i = 0; i < vb->get_len(); i++){
-				// sb_q.push(&vb);
-				sb_q.push_back(vb);
+			for(int j = 0; j < sb_q.size(); j++){
+				if(sb_q[j] == nullptr){
+					for(int i = j; i < j + vb->get_len(); i++){
+						sb_q[i] = vb;
+					}return;
+				}
 			} break;
-		case Direction::east:
-			for(int i = 0; i < vb->get_len(); i++){
-				// eb_q.push(&vb);
-				eb_q.push_back(vb);
-			} break;
+
+
 		case Direction::west:
-			for(int i = 0; i < vb->get_len(); i++){
-				// wb_q.push(&vb);
-				wb_q.push_back(vb);
+			for(int j = 0; j < wb_q.size(); j++){
+				if(wb_q[j] == nullptr){
+					for(int i = j; i < j + vb->get_len(); i++){
+						wb_q[i] = vb;
+					}return;
+				}
 			} break;
+
+		case Direction::east:
+			for(int j = 0; j < eb_q.size(); j++){
+				if(eb_q[j] == nullptr){
+					for(int i = j; i < j + vb->get_len(); i++){
+						eb_q[i] = vb;
+					}return;
+				}
+			} break;
+
 	}
 }

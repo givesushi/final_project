@@ -11,7 +11,7 @@
 using namespace std;
 
 class Lanes{
-private:
+public:
 	vector<VehicleBase*> nb_lane;
 	vector<VehicleBase*> sb_lane;
 	vector<VehicleBase*> eb_lane;
@@ -44,13 +44,13 @@ private:
 
 	void update_entering_lanes();
 
-public:
+
 	// Constructors
 	Lanes(int numSectionsBeforeIntersection);
 	~Lanes();
 
 	void progress_lanes(bool ns_red, bool ew_red);
-	// void new_vehicle(Direction dir, VehicleType type, Turn turn);
+	void new_vehicle(VehicleBase* vb);
 	void assign_vehicle(VehicleBase* vb);
 
 	inline vector<VehicleBase*> get_nb_lane() const { return this-> nb_lane; }
