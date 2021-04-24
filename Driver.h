@@ -24,7 +24,8 @@ public:
 	void update_pos(pair<int,int> pos, pair<int,int> vec);
 
 	pair<int,int> closed_addition(pair<int,int> v1, pair<int,int> v2);
-
+	
+	bool coordinate_map_contains(pair<int,int> key);
 
 	Driver(int halfSize);
 	~Driver();
