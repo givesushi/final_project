@@ -50,205 +50,378 @@ Driver::Driver(string infile){
 
   //values for generating new vehicles each clock tick
   //EAST
-  double east_car = prob_new_vehicle_eastbound * proportion_of_cars;
-  double east_car_l = east_car * proportion_left_turn_cars;
-  double east_car_r = east_car_l + (east_car * proportion_right_turn_cars);
-  double east_car_s = east_car_r + (east_car * proportion_straight_cars);
+  east_car = prob_new_vehicle_eastbound * proportion_of_cars;
+  east_car_l = east_car * proportion_left_turn_cars;
+  east_car_r = east_car_l + (east_car * proportion_right_turn_cars);
+  east_car_s = east_car_r + (east_car * proportion_straight_cars);
 
-  double east_SUV = (prob_new_vehicle_eastbound * proportion_of_SUVs);
-  double east_SUV_l = east_car_s + (east_SUV * proportion_left_turn_SUVs);
-  double east_SUV_r = east_SUV_l + (east_SUV * proportion_right_turn_SUVs);
-  double east_SUV_s = east_SUV_r + (east_SUV * proportion_straight_SUVs);
+  east_SUV = (prob_new_vehicle_eastbound * proportion_of_SUVs);
+  east_SUV_l = east_car_s + (east_SUV * proportion_left_turn_SUVs);
+  east_SUV_r = east_SUV_l + (east_SUV * proportion_right_turn_SUVs);
+  east_SUV_s = east_SUV_r + (east_SUV * proportion_straight_SUVs);
 
-  double east_truck = (prob_new_vehicle_eastbound * proportion_of_trucks);
-  double east_truck_l = east_SUV_s + (east_truck * proportion_left_turn_trucks);
-  double east_truck_r = east_truck_l + (east_truck * proportion_right_turn_trucks);
-  double east_truck_s = east_truck_r + (east_truck * proportion_straight_trucks);
+  east_truck = (prob_new_vehicle_eastbound * proportion_of_trucks);
+  east_truck_l = east_SUV_s + (east_truck * proportion_left_turn_trucks);
+  east_truck_r = east_truck_l + (east_truck * proportion_right_turn_trucks);
+  east_truck_s = east_truck_r + (east_truck * proportion_straight_trucks);
 
   //WEST
-  double west_car = prob_new_vehicle_westbound * proportion_of_cars;
-  double west_car_l = west_car * proportion_left_turn_cars;
-  double west_car_r = west_car_l + (west_car * proportion_right_turn_cars);
-  double west_car_s = west_car_r + (west_car * proportion_straight_cars);
+  west_car = prob_new_vehicle_westbound * proportion_of_cars;
+  west_car_l = west_car * proportion_left_turn_cars;
+  west_car_r = west_car_l + (west_car * proportion_right_turn_cars);
+  west_car_s = west_car_r + (west_car * proportion_straight_cars);
 
-  double west_SUV = (prob_new_vehicle_westbound * proportion_of_SUVs);
-  double west_SUV_l = west_car_s + (west_SUV * proportion_left_turn_SUVs);
-  double west_SUV_r = west_SUV_l + (west_SUV * proportion_right_turn_SUVs);
-  double west_SUV_s = west_SUV_r + (west_SUV * proportion_straight_SUVs);
+  west_SUV = (prob_new_vehicle_westbound * proportion_of_SUVs);
+  west_SUV_l = west_car_s + (west_SUV * proportion_left_turn_SUVs);
+  west_SUV_r = west_SUV_l + (west_SUV * proportion_right_turn_SUVs);
+  west_SUV_s = west_SUV_r + (west_SUV * proportion_straight_SUVs);
 
-  double west_truck = (prob_new_vehicle_westbound * proportion_of_trucks);
-  double west_truck_l = west_SUV_s + (west_truck * proportion_left_turn_trucks);
-  double west_truck_r = west_truck_l + (west_truck * proportion_right_turn_trucks);
-  double west_truck_s = west_truck_r + (west_truck * proportion_straight_trucks);
+  west_truck = (prob_new_vehicle_westbound * proportion_of_trucks);
+  west_truck_l = west_SUV_s + (west_truck * proportion_left_turn_trucks);
+  west_truck_r = west_truck_l + (west_truck * proportion_right_turn_trucks);
+  west_truck_s = west_truck_r + (west_truck * proportion_straight_trucks);
 
   //SOUTH
-  double south_car = prob_new_vehicle_southbound * proportion_of_cars;
-  double south_car_l = south_car * proportion_left_turn_cars;
-  double south_car_r = south_car_l + (south_car * proportion_right_turn_cars);
-  double south_car_s = south_car_r + (south_car * proportion_straight_cars);
+  south_car = prob_new_vehicle_southbound * proportion_of_cars;
+  south_car_l = south_car * proportion_left_turn_cars;
+  south_car_r = south_car_l + (south_car * proportion_right_turn_cars);
+  south_car_s = south_car_r + (south_car * proportion_straight_cars);
 
-  double south_SUV = (prob_new_vehicle_southbound * proportion_of_SUVs);
-  double south_SUV_l = south_car_s + (south_SUV * proportion_left_turn_SUVs);
-  double south_SUV_r = south_SUV_l + (south_SUV * proportion_right_turn_SUVs);
-  double south_SUV_s = south_SUV_r + (south_SUV * proportion_straight_SUVs);
+  south_SUV = (prob_new_vehicle_southbound * proportion_of_SUVs);
+  south_SUV_l = south_car_s + (south_SUV * proportion_left_turn_SUVs);
+  south_SUV_r = south_SUV_l + (south_SUV * proportion_right_turn_SUVs);
+  south_SUV_s = south_SUV_r + (south_SUV * proportion_straight_SUVs);
 
-  double south_truck = (prob_new_vehicle_southbound * proportion_of_trucks);
-  double south_truck_l = south_SUV_s + (south_truck * proportion_left_turn_trucks);
-  double south_truck_r = south_truck_l + (south_truck * proportion_right_turn_trucks);
-  double south_truck_s = south_truck_r + (south_truck * proportion_straight_trucks);
+  south_truck = (prob_new_vehicle_southbound * proportion_of_trucks);
+  south_truck_l = south_SUV_s + (south_truck * proportion_left_turn_trucks);
+  south_truck_r = south_truck_l + (south_truck * proportion_right_turn_trucks);
+  south_truck_s = south_truck_r + (south_truck * proportion_straight_trucks);
 
   //NORTH
-  double north_car = prob_new_vehicle_northbound * proportion_of_cars;
-  double north_car_l = north_car * proportion_left_turn_cars;
-  double north_car_r = north_car_l + (north_car * proportion_right_turn_cars);
-  double north_car_s = north_car_r + (north_car * proportion_straight_cars);
+  north_car = prob_new_vehicle_northbound * proportion_of_cars;
+  north_car_l = north_car * proportion_left_turn_cars;
+  north_car_r = north_car_l + (north_car * proportion_right_turn_cars);
+  north_car_s = north_car_r + (north_car * proportion_straight_cars);
 
-  double north_SUV = (prob_new_vehicle_northbound * proportion_of_SUVs);
-  double north_SUV_l = north_car_s + (north_SUV * proportion_left_turn_SUVs);
-  double north_SUV_r = north_SUV_l + (north_SUV * proportion_right_turn_SUVs);
-  double north_SUV_s = north_SUV_r + (north_SUV * proportion_straight_SUVs);
+  north_SUV = (prob_new_vehicle_northbound * proportion_of_SUVs);
+  north_SUV_l = north_car_s + (north_SUV * proportion_left_turn_SUVs);
+  north_SUV_r = north_SUV_l + (north_SUV * proportion_right_turn_SUVs);
+  north_SUV_s = north_SUV_r + (north_SUV * proportion_straight_SUVs);
 
-  double north_truck = (prob_new_vehicle_northbound * proportion_of_trucks);
-  double north_truck_l = north_SUV_s + (north_truck * proportion_left_turn_trucks);
-  double north_truck_r = north_truck_l + (north_truck * proportion_right_turn_trucks);
-  double north_truck_s = north_truck_r + (north_truck * proportion_straight_trucks);
+  north_truck = (prob_new_vehicle_northbound * proportion_of_trucks);
+  north_truck_l = north_SUV_s + (north_truck * proportion_left_turn_trucks);
+  north_truck_r = north_truck_l + (north_truck * proportion_right_turn_trucks);
+  north_truck_s = north_truck_r + (north_truck * proportion_straight_trucks);
 
 }
 
-void Driver::generateVehicles(double rand, Animator anim){
+Driver::~Driver(){}
+
+void Driver::generateVehicles(double rand, Lanes lanes){
+
   //Generate a new vehicle based on random number for each lane.
   //EAST
   if(rand < east_truck_s){
     if(rand < east_car_l){
-      //to do: write in constructors and add to lanes.
+      VehicleBase vb(VehicleType::car, Direction::east, Turn::left);
+      lanes.new_vehicle(&vb);
     }else if(rand < east_car_r){
-
+			VehicleBase vb(VehicleType::car, Direction::east, Turn::right);
+      lanes.new_vehicle(&vb);
     }else if(rand < east_car_s){
-
+      VehicleBase vb(VehicleType::car, Direction::east, Turn::straight);
+      lanes.new_vehicle(&vb);
     }else if(rand < east_SUV_l){
-
+			VehicleBase vb(VehicleType::suv, Direction::east, Turn::left);
+      lanes.new_vehicle(&vb);
     }else if(rand < east_SUV_r){
-
+			VehicleBase vb(VehicleType::suv, Direction::east, Turn::right);
+      lanes.new_vehicle(&vb);
     }else if(rand < east_SUV_s){
-
+			VehicleBase vb(VehicleType::suv, Direction::east, Turn::straight);
+      lanes.new_vehicle(&vb);
     }else if(rand < east_truck_l){
-
+			VehicleBase vb(VehicleType::truck, Direction::east, Turn::left);
+      lanes.new_vehicle(&vb);
     }else if(rand < east_truck_r){
-
+			VehicleBase vb(VehicleType::truck, Direction::east, Turn::right);
+      lanes.new_vehicle(&vb);
     }else{
-
+			VehicleBase vb(VehicleType::truck, Direction::east, Turn::straight);
+      lanes.new_vehicle(&vb);
     }
   }
 
-  //WEST
-  if(rand < west_truck_s){
-    if(rand < west_car_l){
 
-    }else if(rand < west_car_r){
-
-    }else if(rand < west_car_s){
-
-    }else if(rand < west_SUV_l){
-
-    }else if(rand < west_SUV_r){
-
-    }else if(rand < west_SUV_s){
-
-    }else if(rand < west_truck_l){
-
-    }else if(rand < west_truck_r){
-
-    }else{
-
-    }
-  }
-
-  //NORTH
-  if(rand < north_truck_s){
-    if(rand < north_car_l){
-
-    }else if(rand < north_car_r){
-
-    }else if(rand < north_car_s){
-
-    }else if(rand < north_SUV_l){
-
-    }else if(rand < north_SUV_r){
-
-    }else if(rand < north_SUV_s){
-
-    }else if(rand < north_truck_l){
-
-    }else if(rand < north_truck_r){
-
-    }else{
-
-    }
-  }
-
-  //SOUTH
-  if(rand < south_truck_s){
-    if(rand < south_car_l){
-
-    }else if(rand < south_car_r){
-
-    }else if(rand < south_car_s){
-
-    }else if(rand < south_SUV_l){
-
-    }else if(rand < south_SUV_r){
-
-    }else if(rand < south_SUV_s){
-
-    }else if(rand < south_truck_l){
-
-    }else if(rand < south_truck_r){
-
-    }else{
-
-    }
-  }
-
+  // //WEST
+  // if(rand < west_truck_s){
+  //   if(rand < west_car_l){
+	// 		lanes.new_vehicle(Direction::west, VehicleType::car, Turn::left);
+  //   }else if(rand < west_car_r){
+	// 		lanes.new_vehicle(Direction::west, VehicleType::car, Turn::right);
+  //   }else if(rand < west_car_s){
+	// 		lanes.new_vehicle(Direction::west, VehicleType::car, Turn::straight);
+  //   }else if(rand < west_SUV_l){
+	// 		lanes.new_vehicle(Direction::west, VehicleType::suv, Turn::left);
+  //   }else if(rand < west_SUV_r){
+	// 		lanes.new_vehicle(Direction::west, VehicleType::suv, Turn::right);
+  //   }else if(rand < west_SUV_s){
+	// 		lanes.new_vehicle(Direction::west, VehicleType::suv, Turn::straight);
+  //   }else if(rand < west_truck_l){
+	// 		lanes.new_vehicle(Direction::west, VehicleType::truck, Turn::left);
+  //   }else if(rand < west_truck_r){
+	// 		lanes.new_vehicle(Direction::west, VehicleType::truck, Turn::right);
+  //   }else{
+	// 		lanes.new_vehicle(Direction::west, VehicleType::truck, Turn::straight);
+  //   }
+  // }
+  //
+  // //NORTH
+  // if(rand < north_truck_s){
+  //   if(rand < north_car_l){
+	// 		lanes.new_vehicle(Direction::north, VehicleType::car, Turn::left);
+  //   }else if(rand < north_car_r){
+	// 		lanes.new_vehicle(Direction::north, VehicleType::car, Turn::right);
+  //   }else if(rand < north_car_s){
+	// 		lanes.new_vehicle(Direction::north, VehicleType::car, Turn::straight);
+  //   }else if(rand < north_SUV_l){
+	// 		lanes.new_vehicle(Direction::north, VehicleType::suv, Turn::left);
+  //   }else if(rand < north_SUV_r){
+	// 		lanes.new_vehicle(Direction::north, VehicleType::suv, Turn::right);
+  //   }else if(rand < north_SUV_s){
+	// 		lanes.new_vehicle(Direction::north, VehicleType::suv, Turn::straight);
+  //   }else if(rand < north_truck_l){
+	// 		lanes.new_vehicle(Direction::north, VehicleType::truck, Turn::left);
+  //   }else if(rand < north_truck_r){
+	// 		lanes.new_vehicle(Direction::north, VehicleType::truck, Turn::right);
+  //   }else{
+	// 		lanes.new_vehicle(Direction::north, VehicleType::truck, Turn::straight);
+  //   }
+  // }
+  //
+  // //SOUTH
+  // if(rand < south_truck_s){
+  //   if(rand < south_car_l){
+	// 		lanes.new_vehicle(Direction::south, VehicleType::car, Turn::left);
+  //   }else if(rand < south_car_r){
+	// 		lanes.new_vehicle(Direction::south, VehicleType::car, Turn::right);
+  //   }else if(rand < south_car_s){
+	// 		lanes.new_vehicle(Direction::south, VehicleType::car, Turn::straight);
+  //   }else if(rand < south_SUV_l){
+	// 		lanes.new_vehicle(Direction::south, VehicleType::suv, Turn::left);
+  //   }else if(rand < south_SUV_r){
+	// 		lanes.new_vehicle(Direction::south, VehicleType::suv, Turn::right);
+  //   }else if(rand < south_SUV_s){
+	// 		lanes.new_vehicle(Direction::south, VehicleType::suv, Turn::straight);
+  //   }else if(rand < south_truck_l){
+	// 		lanes.new_vehicle(Direction::south, VehicleType::truck, Turn::left);
+  //   }else if(rand < south_truck_r){
+	// 		lanes.new_vehicle(Direction::south, VehicleType::truck, Turn::right);
+  //   }else{
+	// 		lanes.new_vehicle(Direction::south, VehicleType::truck, Turn::straight);
+  //   }
+  // }
 
 }
 
-void Driver::run(){
 
-  //Animator to draw simulation
-  Animator anim(this->number_of_sections_before_intersection);
+int main(int argc, char* argv[]){
 
-  //random number generation
+  //Driver object to get all the inputs.
+	Driver driver{argv[1]};
+
+  // Random number generator variables
+  // random number seed given by user.
+	int seed = stoi(argv[2]);
+
   mt19937 randomNumberGenerator;
   uniform_real_distribution<double> rand_double(0.0, 1.0);
+	randomNumberGenerator.seed(seed);
   double rand;
 
+  Animator anim(driver.number_of_sections_before_intersection);
+  Lanes lanes(driver.number_of_sections_before_intersection);
+
+  VehicleBase vb_n(VehicleType::suv, Direction::north, Turn::right);
+  VehicleBase vb_n1(VehicleType::car, Direction::north, Turn::right);
+  VehicleBase vb_s(VehicleType::car, Direction::south, Turn::straight);
+  VehicleBase vb_s1(VehicleType::car, Direction::south, Turn::right);
+  VehicleBase vb_e(VehicleType::car, Direction::east, Turn::straight);
+  VehicleBase vb_e1(VehicleType::car, Direction::east, Turn::right);
+  VehicleBase vb_w(VehicleType::car, Direction::west, Turn::straight);
+  VehicleBase vb_w1(VehicleType::car, Direction::west, Turn::right);
+
+  lanes.new_vehicle(&vb_n);
+  lanes.new_vehicle(&vb_s);
+  lanes.new_vehicle(&vb_e);
+  lanes.new_vehicle(&vb_w);
+
+
+  bool ns_red = false;
+  bool ew_red = true;
+  bool ns_yellow;
+  bool ew_yellow;
+
+
+  int ns_green_count;
+  int ew_green_count;
+  int ns_yellow_count;
+  int ew_yellow_count;
+
+  char dummy;
   int clock = 0;
 
-  //main loop for the simulation
-  while(clock < maximum_simulated_time){
+  anim.setLightNorthSouth(LightColor::green);
+  anim.setLightEastWest(LightColor::red);
+
+  while(clock <= driver.maximum_simulated_time){
 
     rand = rand_double(randomNumberGenerator);
 
-    generateVehicles(rand, anim);
+    if(!ns_red){
+      if(!ns_yellow){
+        ns_green_count++;
+      }else{
+        ns_yellow_count++;
+      }
+    }
 
-    /*
-    For each clock tick:
-      1) generate a new random number
-      2) generate new vehicles and add them to the lanes using generateVehicles()
-      3) advance lanes when possible
-         - handle turns and straights
-      4) imcrement traffic lights towards changes
-      5) anim.draw()
-      6) wait for input (key click), then loop
-    */
 
-    //iterate clock
+    if(!ew_red){
+      if(!ew_yellow){
+        ew_green_count++;
+      }else{
+        ew_yellow_count++;
+      }
+    }
+
+    if(ns_green_count == driver.green_north_south){
+      ns_yellow = true;
+      anim.setLightNorthSouth(LightColor::yellow);
+    }
+
+    if(ns_yellow_count == driver.yellow_north_south){
+      ns_yellow = false;
+      ns_red = true;
+      ew_red = false;
+      anim.setLightNorthSouth(LightColor::red);
+      anim.setLightEastWest(LightColor::green);
+    }
+
+    if(ew_green_count == driver.green_east_west){
+      ew_yellow = true;
+      anim.setLightEastWest(LightColor::yellow);
+    }
+
+    if(ew_yellow_count == driver.yellow_east_west){
+      ew_yellow = false;
+      ew_red = true;
+      ns_red = false;
+      anim.setLightEastWest(LightColor::red);
+      anim.setLightNorthSouth(LightColor::green);
+    }
+
+    anim.setVehiclesNorthbound(lanes.get_nb_lane());
+    anim.setVehiclesWestbound(lanes.get_wb_lane());
+    anim.setVehiclesSouthbound(lanes.get_sb_lane());
+    anim.setVehiclesEastbound(lanes.get_eb_lane());
+
+    anim.draw(clock);
+
+    cin.get(dummy);
+
+    lanes.advanceTops(ns_red, ew_red);
+    lanes.advanceBottoms();
+    lanes.addFromQ();
+
+
+
     clock++;
+
   }
 
-}
 
-int main(int argc, char* argv[]){
+
+
+  //
+  // int clock = 0;
+  //
+  // //traffic light variables
+  // bool ns_red = false;
+	// bool ew_red = true;
+	// int count_ns = 0;
+	// int count_ew = 0;
+  //
+  // //lanes object
+  // Lanes lanes{driver.number_of_sections_before_intersection};
+  //
+  // //Animator object
+  // Animator anim{driver.number_of_sections_before_intersection};
+  // Animator::MAX_VEHICLE_COUNT = 999;
+  //
+  // //used for input to progress simulation.
+  // char dummy;
+  //
+  // vector<VehicleBase> v;
+  // VehicleBase vb(VehicleType::car, Direction::east, Turn::left);
+  //
+  // //SIMULATION STARTS HERE
+  // //main loop for the simulation
+  // while(clock < driver.maximum_simulated_time){
+  //
+  //   //Set traffic lights
+	// 	if(count_ns == 0){ ns_red = false; }
+	// 	if(!ns_red){
+	// 		if(count_ns == 0){
+	// 			anim.setLightNorthSouth(LightColor::green);
+	// 		}else if(count_ns == driver.green_north_south){
+	// 			anim.setLightNorthSouth(LightColor::yellow);
+	// 		}else if(count_ns == driver.green_north_south + driver.yellow_north_south){
+	// 			anim.setLightNorthSouth(LightColor::red);
+	// 			ns_red = true;
+	// 			count_ew = 0;
+	// 		} count_ns++;
+	// 	}else{
+	// 		if(count_ew == 0){
+	// 			anim.setLightEastWest(LightColor::green);
+	// 			ew_red = false;
+	// 		}else if(count_ew == driver.green_east_west){
+	// 			anim.setLightEastWest(LightColor::yellow);
+	// 		}else if(count_ew == driver.green_east_west + driver.yellow_east_west){
+	// 			anim.setLightEastWest(LightColor::red);
+	// 			ew_red = true;
+	// 			count_ns = 0;
+	// 		} count_ew++;
+	// 	}
+  //
+  //   //generate a random number
+  //   rand = rand_double(randomNumberGenerator);
+  //
+  //   //generate vehicles based on rand
+  //   vb = driver.generateVehicles(rand);
+  //   v.push_back(vb);
+  //
+  //   lanes.new_vehicle(vb);
+  //
+  //   //update the lanes by one cycle
+	// 	// lanes.progress_lanes(ns_red, ew_red);
+  //
+  //   //give updated lanes to the animator
+	// 	anim.setVehiclesNorthbound(lanes.get_nb_lane());
+	// 	anim.setVehiclesWestbound(lanes.get_wb_lane());
+	// 	anim.setVehiclesSouthbound(lanes.get_sb_lane());
+	// 	anim.setVehiclesEastbound(lanes.get_eb_lane());
+  //
+  //   //draw the intersection
+	// 	anim.draw(clock);
+  //
+  //   //wait for input
+	// 	cin.get(dummy);
+  //
+  //   //iterate clock and loop
+  //   clock++;
+  // }
+  //
 
   return 0;
 }

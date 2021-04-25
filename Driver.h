@@ -1,11 +1,17 @@
+#ifndef __DRIVER_H__
+#define __DRIVER_H__
+
 #include "VehicleBase.h"
 #include "Animator.h"
+#include "Lanes.h"
 #include <iostream>
 #include <fstream>
 #include <random>
 using namespace std;
 
 class Driver{
+
+public:
 
   //input variables from file
   int maximum_simulated_time;
@@ -91,16 +97,16 @@ class Driver{
 
 
   //FUNCTIONS
-
-public:
   //constructor
   Driver(string infile);
   ~Driver();
 
   //construct and add vehicles to lanes in anim
-  void generateVehicles(double rand, Animator anim);
+  void generateVehicles(double rand, Lanes lanes);
 
   //run the simulation
-  void run();
+  void run(int seed);
 
 };
+
+#endif
