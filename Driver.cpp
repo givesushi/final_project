@@ -425,3 +425,38 @@ int main(int argc, char* argv[]){
 
   return 0;
 }
+
+/*
+To randomly generate vehhicles, the program takes the initial seed value and uses it to generate a random double.
+Then, it takes probabilities from the input file and uses them to determine the type of each vehicle, its direction,
+and which direction it will turn in, if any, using the random double.
+
+For example, taking the following probabilities as input:
+prob_new_vehicle_northbound:               0.25
+prob_new_vehicle_southbound:               0.1
+prob_new_vehicle_eastbound:                0.15
+prob_new_vehicle_westbound:                0.15
+proportion_of_cars:                        0.6
+proportion_of_SUVs:                        0.3
+proportion_right_turn_cars:                0.4
+proportion_left_turn_cars:                 0.1
+proportion_right_turn_SUVs:                0.3
+proportion_left_turn_SUVs:                 0.05
+proportion_right_turn_trucks:              0.2
+proportion_left_turn_trucks:               0.02
+
+We first calculate each percentage and multiply them together. For example:
+proportion_of_cars = proportion_of_cars/(proportion_of_cars + proportion_of_SUVs)
+
+Is equivalent to:
+proportion_of_cars = 0.6/0.9
+
+We don't do this:
+prob_new_vehicle_northbound = 0.25/(0.25+0.1+0.15+0.15) = 0.25/0.65
+
+Because that's a probability, not a proportion. So:
+vb10 = prob_new_vehicle_northbound * proportion_of_cars = 0.25(0.6/0.9) (this comes out to about 0.17)
+
+Then we generate a random double. If the value is between 0-0.17, we generate a northbound car. If the value is
+between 0.18-0.25, we generate a northbound truck, and so on.
+*/
