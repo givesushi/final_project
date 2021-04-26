@@ -117,111 +117,100 @@ Driver::Driver(string infile){
 
 Driver::~Driver(){}
 
-void Driver::generateVehicles(double rand, Lanes lanes){
+VehicleBase* Driver::generateVehicles(double rand, Direction start){
 
   //Generate a new vehicle based on random number for each lane.
   //EAST
-  if(rand < east_truck_s){
-    if(rand < east_car_l){
-      VehicleBase vb(VehicleType::car, Direction::east, Turn::left);
-      lanes.new_vehicle(&vb);
-    }else if(rand < east_car_r){
-			VehicleBase vb(VehicleType::car, Direction::east, Turn::right);
-      lanes.new_vehicle(&vb);
-    }else if(rand < east_car_s){
-      VehicleBase vb(VehicleType::car, Direction::east, Turn::straight);
-      lanes.new_vehicle(&vb);
-    }else if(rand < east_SUV_l){
-			VehicleBase vb(VehicleType::suv, Direction::east, Turn::left);
-      lanes.new_vehicle(&vb);
-    }else if(rand < east_SUV_r){
-			VehicleBase vb(VehicleType::suv, Direction::east, Turn::right);
-      lanes.new_vehicle(&vb);
-    }else if(rand < east_SUV_s){
-			VehicleBase vb(VehicleType::suv, Direction::east, Turn::straight);
-      lanes.new_vehicle(&vb);
-    }else if(rand < east_truck_l){
-			VehicleBase vb(VehicleType::truck, Direction::east, Turn::left);
-      lanes.new_vehicle(&vb);
-    }else if(rand < east_truck_r){
-			VehicleBase vb(VehicleType::truck, Direction::east, Turn::right);
-      lanes.new_vehicle(&vb);
-    }else{
-			VehicleBase vb(VehicleType::truck, Direction::east, Turn::straight);
-      lanes.new_vehicle(&vb);
-    }
-  }
-
-
-  // //WEST
-  // if(rand < west_truck_s){
-  //   if(rand < west_car_l){
-	// 		lanes.new_vehicle(Direction::west, VehicleType::car, Turn::left);
-  //   }else if(rand < west_car_r){
-	// 		lanes.new_vehicle(Direction::west, VehicleType::car, Turn::right);
-  //   }else if(rand < west_car_s){
-	// 		lanes.new_vehicle(Direction::west, VehicleType::car, Turn::straight);
-  //   }else if(rand < west_SUV_l){
-	// 		lanes.new_vehicle(Direction::west, VehicleType::suv, Turn::left);
-  //   }else if(rand < west_SUV_r){
-	// 		lanes.new_vehicle(Direction::west, VehicleType::suv, Turn::right);
-  //   }else if(rand < west_SUV_s){
-	// 		lanes.new_vehicle(Direction::west, VehicleType::suv, Turn::straight);
-  //   }else if(rand < west_truck_l){
-	// 		lanes.new_vehicle(Direction::west, VehicleType::truck, Turn::left);
-  //   }else if(rand < west_truck_r){
-	// 		lanes.new_vehicle(Direction::west, VehicleType::truck, Turn::right);
-  //   }else{
-	// 		lanes.new_vehicle(Direction::west, VehicleType::truck, Turn::straight);
-  //   }
-  // }
-  //
-  // //NORTH
-  // if(rand < north_truck_s){
-  //   if(rand < north_car_l){
-	// 		lanes.new_vehicle(Direction::north, VehicleType::car, Turn::left);
-  //   }else if(rand < north_car_r){
-	// 		lanes.new_vehicle(Direction::north, VehicleType::car, Turn::right);
-  //   }else if(rand < north_car_s){
-	// 		lanes.new_vehicle(Direction::north, VehicleType::car, Turn::straight);
-  //   }else if(rand < north_SUV_l){
-	// 		lanes.new_vehicle(Direction::north, VehicleType::suv, Turn::left);
-  //   }else if(rand < north_SUV_r){
-	// 		lanes.new_vehicle(Direction::north, VehicleType::suv, Turn::right);
-  //   }else if(rand < north_SUV_s){
-	// 		lanes.new_vehicle(Direction::north, VehicleType::suv, Turn::straight);
-  //   }else if(rand < north_truck_l){
-	// 		lanes.new_vehicle(Direction::north, VehicleType::truck, Turn::left);
-  //   }else if(rand < north_truck_r){
-	// 		lanes.new_vehicle(Direction::north, VehicleType::truck, Turn::right);
-  //   }else{
-	// 		lanes.new_vehicle(Direction::north, VehicleType::truck, Turn::straight);
-  //   }
-  // }
-  //
-  // //SOUTH
-  // if(rand < south_truck_s){
-  //   if(rand < south_car_l){
-	// 		lanes.new_vehicle(Direction::south, VehicleType::car, Turn::left);
-  //   }else if(rand < south_car_r){
-	// 		lanes.new_vehicle(Direction::south, VehicleType::car, Turn::right);
-  //   }else if(rand < south_car_s){
-	// 		lanes.new_vehicle(Direction::south, VehicleType::car, Turn::straight);
-  //   }else if(rand < south_SUV_l){
-	// 		lanes.new_vehicle(Direction::south, VehicleType::suv, Turn::left);
-  //   }else if(rand < south_SUV_r){
-	// 		lanes.new_vehicle(Direction::south, VehicleType::suv, Turn::right);
-  //   }else if(rand < south_SUV_s){
-	// 		lanes.new_vehicle(Direction::south, VehicleType::suv, Turn::straight);
-  //   }else if(rand < south_truck_l){
-	// 		lanes.new_vehicle(Direction::south, VehicleType::truck, Turn::left);
-  //   }else if(rand < south_truck_r){
-	// 		lanes.new_vehicle(Direction::south, VehicleType::truck, Turn::right);
-  //   }else{
-	// 		lanes.new_vehicle(Direction::south, VehicleType::truck, Turn::straight);
-  //   }
-  // }
-
+	switch(start){
+		case Direction::east:
+			if(rand < east_truck_s){
+				if(rand < east_car_l){
+					return new VehicleBase(VehicleType::car, Direction::east, Turn::left);
+				}else if(rand < east_car_r){
+					return new VehicleBase(VehicleType::car, Direction::east, Turn::right);
+				}else if(rand < east_car_s){
+					return new VehicleBase(VehicleType::car, Direction::east, Turn::straight);
+				}else if(rand < east_SUV_l){
+					return new VehicleBase(VehicleType::suv, Direction::east, Turn::left);
+				}else if(rand < east_SUV_r){
+					return new VehicleBase(VehicleType::suv, Direction::east, Turn::right);
+				}else if(rand < east_SUV_s){
+					return new VehicleBase(VehicleType::suv, Direction::east, Turn::straight);
+				}else if(rand < east_truck_l){
+					return new VehicleBase(VehicleType::truck, Direction::east, Turn::left);
+				}else if(rand < east_truck_r){
+					return new VehicleBase(VehicleType::truck, Direction::east, Turn::right);
+				}else{
+					return new VehicleBase(VehicleType::truck, Direction::east, Turn::straight);
+				}
+			} return nullptr;
+		case Direction::west:
+			if(rand < west_truck_s){
+				if(rand < west_car_l){
+					return new VehicleBase(VehicleType::car, Direction::west, Turn::left);
+				}else if(rand < west_car_r){
+					return new VehicleBase(VehicleType::car, Direction::west, Turn::right);
+				}else if(rand < west_car_s){
+					return new VehicleBase(VehicleType::car, Direction::west, Turn::straight);
+				}else if(rand < west_SUV_l){
+					return new VehicleBase(VehicleType::suv, Direction::west, Turn::left);
+				}else if(rand < west_SUV_r){
+					return new VehicleBase(VehicleType::suv, Direction::west, Turn::right);
+				}else if(rand < west_SUV_s){
+					return new VehicleBase(VehicleType::suv, Direction::west, Turn::straight);
+				}else if(rand < west_truck_l){
+					return new VehicleBase(VehicleType::truck, Direction::west, Turn::left);
+				}else if(rand < west_truck_r){
+					return new VehicleBase(VehicleType::truck, Direction::west, Turn::right);
+				}else{
+					return new VehicleBase(VehicleType::truck, Direction::west, Turn::straight);
+				}
+			}return nullptr;
+		case Direction::north:
+			if(rand < north_truck_s){
+				if(rand < north_car_l){
+					return new VehicleBase(VehicleType::car, Direction::north, Turn::left);
+				}else if(rand < north_car_r){
+					return new VehicleBase(VehicleType::car, Direction::north, Turn::right);
+				}else if(rand < north_car_s){
+					return new VehicleBase(VehicleType::car, Direction::north, Turn::straight);
+				}else if(rand < north_SUV_l){
+					return new VehicleBase(VehicleType::suv, Direction::north, Turn::left);
+				}else if(rand < north_SUV_r){
+					return new VehicleBase(VehicleType::suv, Direction::north, Turn::right);
+				}else if(rand < north_SUV_s){
+					return new VehicleBase(VehicleType::suv, Direction::north, Turn::straight);
+				}else if(rand < north_truck_l){
+					return new VehicleBase(VehicleType::truck, Direction::north, Turn::left);
+				}else if(rand < north_truck_r){
+					return new VehicleBase(VehicleType::truck, Direction::north, Turn::right);
+				}else{
+					return new VehicleBase(VehicleType::truck, Direction::north, Turn::straight);
+				}
+			}return nullptr;
+		case Direction::south:
+			if(rand < south_truck_s){
+		    if(rand < south_car_l){
+					return new VehicleBase(VehicleType::car, Direction::south, Turn::left);
+		    }else if(rand < south_car_r){
+					return new VehicleBase(VehicleType::car, Direction::south, Turn::right);
+		    }else if(rand < south_car_s){
+					return new VehicleBase(VehicleType::car, Direction::south, Turn::straight);
+		    }else if(rand < south_SUV_l){
+					return new VehicleBase(VehicleType::suv, Direction::south, Turn::left);
+		    }else if(rand < south_SUV_r){
+					return new VehicleBase(VehicleType::suv, Direction::south, Turn::right);
+		    }else if(rand < south_SUV_s){
+					return new VehicleBase(VehicleType::suv, Direction::south, Turn::straight);
+		    }else if(rand < south_truck_l){
+					return new VehicleBase(VehicleType::truck, Direction::south, Turn::left);
+		    }else if(rand < south_truck_r){
+					return new VehicleBase(VehicleType::truck, Direction::south, Turn::right);
+		    }else{
+					return new VehicleBase(VehicleType::truck, Direction::south, Turn::straight);
+		    }
+		  } return nullptr;
+		}
 }
 
 
@@ -242,31 +231,32 @@ int main(int argc, char* argv[]){
   Animator anim(driver.number_of_sections_before_intersection);
   Lanes lanes(driver.number_of_sections_before_intersection);
 
-  VehicleBase vb_n(VehicleType::suv, Direction::north, Turn::right);
-  VehicleBase vb_n1(VehicleType::car, Direction::north, Turn::right);
-  VehicleBase vb_s(VehicleType::car, Direction::south, Turn::straight);
-  VehicleBase vb_s1(VehicleType::car, Direction::south, Turn::right);
-  VehicleBase vb_e(VehicleType::car, Direction::east, Turn::straight);
-  VehicleBase vb_e1(VehicleType::car, Direction::east, Turn::right);
-  VehicleBase vb_w(VehicleType::car, Direction::west, Turn::straight);
-  VehicleBase vb_w1(VehicleType::car, Direction::west, Turn::right);
-
-  lanes.new_vehicle(&vb_n);
-  lanes.new_vehicle(&vb_s);
-  lanes.new_vehicle(&vb_e);
-  lanes.new_vehicle(&vb_w);
+  // VehicleBase vb_n(VehicleType::suv, Direction::north, Turn::right);
+  // VehicleBase vb_n1(VehicleType::car, Direction::north, Turn::right);
+  // VehicleBase vb_s(VehicleType::car, Direction::south, Turn::straight);
+  // VehicleBase vb_s1(VehicleType::car, Direction::south, Turn::right);
+  // VehicleBase vb_e(VehicleType::car, Direction::east, Turn::straight);
+  // VehicleBase vb_e1(VehicleType::car, Direction::east, Turn::right);
+  // VehicleBase vb_w(VehicleType::car, Direction::west, Turn::straight);
+  // VehicleBase vb_w1(VehicleType::car, Direction::west, Turn::right);
+	//
+  // lanes.new_vehicle(&vb_n);
+  // lanes.new_vehicle(&vb_s);
+  // lanes.new_vehicle(&vb_e);
+  // lanes.new_vehicle(&vb_w);
 
 
   bool ns_red = false;
-  bool ew_red = true;
-  bool ns_yellow;
-  bool ew_yellow;
+  // bool ew_red = true;
+  // bool ns_yellow = false;
+  // bool ew_yellow = false;
 
+	int stoplight_timer = 0;
 
-  int ns_green_count;
-  int ew_green_count;
-  int ns_yellow_count;
-  int ew_yellow_count;
+  // int ns_green_count;
+  // int ew_green_count;
+  // int ns_yellow_count;
+  // int ew_yellow_count;
 
   char dummy;
   int clock = 0;
@@ -278,48 +268,78 @@ int main(int argc, char* argv[]){
 
     rand = rand_double(randomNumberGenerator);
 
-    if(!ns_red){
-      if(!ns_yellow){
-        ns_green_count++;
-      }else{
-        ns_yellow_count++;
-      }
-    }
+		lanes.new_vehicle(driver.generateVehicles(rand, Direction::north));
+		lanes.new_vehicle(driver.generateVehicles(rand, Direction::south));
+		lanes.new_vehicle(driver.generateVehicles(rand, Direction::east));
+		lanes.new_vehicle(driver.generateVehicles(rand, Direction::west));
 
-
-    if(!ew_red){
-      if(!ew_yellow){
-        ew_green_count++;
-      }else{
-        ew_yellow_count++;
-      }
-    }
-
-    if(ns_green_count == driver.green_north_south){
-      ns_yellow = true;
-      anim.setLightNorthSouth(LightColor::yellow);
-    }
-
-    if(ns_yellow_count == driver.yellow_north_south){
-      ns_yellow = false;
-      ns_red = true;
-      ew_red = false;
-      anim.setLightNorthSouth(LightColor::red);
-      anim.setLightEastWest(LightColor::green);
-    }
-
-    if(ew_green_count == driver.green_east_west){
-      ew_yellow = true;
-      anim.setLightEastWest(LightColor::yellow);
-    }
-
-    if(ew_yellow_count == driver.yellow_east_west){
-      ew_yellow = false;
-      ew_red = true;
-      ns_red = false;
-      anim.setLightEastWest(LightColor::red);
-      anim.setLightNorthSouth(LightColor::green);
-    }
+		if(ns_red){
+			if(stoplight_timer == driver.green_east_west){
+				anim.setLightEastWest(LightColor::yellow);
+			}else if(stoplight_timer == driver.green_east_west + driver.yellow_east_west){
+				anim.setLightEastWest(LightColor::red);
+				anim.setLightNorthSouth(LightColor::green);
+				ns_red = !ns_red;
+				stoplight_timer = 0;
+			}
+		}else{
+			if(stoplight_timer == 0){
+				anim.setLightNorthSouth(LightColor::green);
+			}else if (stoplight_timer == driver.green_north_south){
+				anim.setLightNorthSouth(LightColor::yellow);
+			}else if(stoplight_timer == driver.green_north_south + driver.yellow_north_south){
+				anim.setLightNorthSouth(LightColor::red);
+				anim.setLightEastWest(LightColor::green);
+				ns_red = !ns_red;
+				stoplight_timer = 0;
+			}
+		}
+    // if(!ns_red){
+    //   if(!ns_yellow){
+    //     ns_green_count++;
+    //   }else{
+    //     ns_yellow_count++;
+    //   }
+    // }
+		//
+		//
+    // if(!ew_red){
+    //   if(!ew_yellow){
+    //     ew_green_count++;
+    //   }else{
+    //     ew_yellow_count++;
+    //   }
+    // }
+		//
+    // if(ns_green_count == driver.green_north_south){
+    //   ns_yellow = true;
+    //   anim.setLightNorthSouth(LightColor::yellow);
+		// 	ns_green_count = 0;
+    // }
+		//
+    // if(ns_yellow_count == driver.yellow_north_south){
+    //   ns_yellow = false;
+    //   ns_red = true;
+    //   ew_red = false;
+    //   anim.setLightNorthSouth(LightColor::red);
+    //   anim.setLightEastWest(LightColor::green);
+		// 	ns_yellow_count = 0;
+    // }
+		//
+    // if(ew_green_count == driver.green_east_west){
+    //   ew_yellow = true;
+    //   anim.setLightEastWest(LightColor::yellow);
+		// 	ew_green_count = 0;
+    // }
+		//
+    // if(ew_yellow_count == driver.yellow_east_west){
+    //   ew_yellow = false;
+    //   ew_red = true;
+    //   ns_red = false;
+    //   anim.setLightEastWest(LightColor::red);
+    //   anim.setLightNorthSouth(LightColor::green);
+		// 	ew_yellow_count = 0;
+    // }
 
     anim.setVehiclesNorthbound(lanes.get_nb_lane());
     anim.setVehiclesWestbound(lanes.get_wb_lane());
@@ -330,14 +350,14 @@ int main(int argc, char* argv[]){
 
     cin.get(dummy);
 
-    lanes.advanceTops(ns_red, ew_red);
+    lanes.advanceTops(ns_red, !ns_red);
     lanes.advanceBottoms();
     lanes.addFromQ();
 
 
 
     clock++;
-
+		stoplight_timer++;
   }
 
 
