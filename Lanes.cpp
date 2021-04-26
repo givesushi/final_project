@@ -445,8 +445,9 @@ void Lanes::progress_lanes(bool ns_red, bool ew_red){
 	update_entering_lanes();
 }
 
-
 void Lanes::new_vehicle(VehicleBase* vb){
+	if(vb == nullptr)
+		return;
 
 	Direction dir = vb->getVehicleOriginalDirection();
 	int len = vb->get_len();
@@ -470,35 +471,33 @@ void Lanes::new_vehicle(VehicleBase* vb){
 	}
 }
 
-
-
 void Lanes::advanceBottoms(){
 
 	for(int i = (lane_len/2)-3; i > -1; i--){
 
 		//move up bottoms of north
 		if(nb_lane[i] != nullptr){
-			if(nb_lane[i+1] == nullptr){
+			if(nb_lane[i+1] == nullptr || nb_lane[i]->isTurning()){
 				nb_lane[i+1] = nb_lane[i];
 				nb_lane[i] = nullptr;
 			}
 		}
 		//move up bottoms of south
-		if(sb_lane[i] != nullptr){
+		if(sb_lane[i] != nullptr || sb_lane[i]->isTurning()){
 			if(sb_lane[i+1] == nullptr){
 				sb_lane[i+1] = sb_lane[i];
 				sb_lane[i] = nullptr;
 			}
 		}
 		//move up bottoms of east
-		if(eb_lane[i] != nullptr){
+		if(eb_lane[i] != nullptr || eb_lane[i]->isTurning()){
 			if(eb_lane[i+1] == nullptr){
 				eb_lane[i+1] = eb_lane[i];
 				eb_lane[i] = nullptr;
 			}
 		}
 		//move up bottoms of west
-		if(wb_lane[i] != nullptr){
+		if(wb_lane[i] != nullptr || wb_lane[i]->isTurning()){
 			if(wb_lane[i+1] == nullptr){
 				wb_lane[i+1] = wb_lane[i];
 				wb_lane[i] = nullptr;
@@ -506,7 +505,6 @@ void Lanes::advanceBottoms(){
 		}
 	}//for
 }//func
-
 
 void Lanes::advanceTops(bool ns_red, bool ew_red){
 	nb_lane[lane_len-1] = nullptr;
@@ -560,6 +558,7 @@ void Lanes::advanceTops(bool ns_red, bool ew_red){
 	if(!ns_red && nb_lane[lane_len/2-2] != nullptr){
 			nb_lane[lane_len/2-1] = nb_lane[lane_len/2-2];
 			nb_lane[lane_len/2-2] = nullptr;
+			nb_lane[lane_len/2-1]->start_turn();
 		}
 
 		//handle south bound turns
@@ -576,6 +575,7 @@ void Lanes::advanceTops(bool ns_red, bool ew_red){
 		if(!ns_red && sb_lane[lane_len/2-2] != nullptr){
 				sb_lane[lane_len/2-1] = sb_lane[lane_len/2-2];
 				sb_lane[lane_len/2-2] = nullptr;
+				sb_lane[lane_len/2-1]->start_turn();
 			}
 
 		//handle east bound turns
@@ -592,6 +592,7 @@ void Lanes::advanceTops(bool ns_red, bool ew_red){
 		if(!ew_red && eb_lane[lane_len/2-2] != nullptr){
 				eb_lane[lane_len/2-1] = eb_lane[lane_len/2-2];
 				eb_lane[lane_len/2-2] = nullptr;
+				eb_lane[lane_len/2-1]->start_turn();
 			}
 
 		//handle west bound turns
@@ -608,11 +609,10 @@ void Lanes::advanceTops(bool ns_red, bool ew_red){
 		if(!ew_red && wb_lane[lane_len/2-2] != nullptr){
 				wb_lane[lane_len/2-1] = wb_lane[lane_len/2-2];
 				wb_lane[lane_len/2-2] = nullptr;
+				wb_lane[lane_len/2-1]->start_turn();
 			}
 
 }//func
-
-
 
 void Lanes::addFromQ(){
 
