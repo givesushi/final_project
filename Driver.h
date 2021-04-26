@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <random>
+#include <memory>
 using namespace std;
 
 class Driver{
@@ -102,7 +103,7 @@ public:
   ~Driver();
 
   //construct and add vehicles to lanes in anim
-  VehicleBase* generateVehicles(double rand, Direction start);
+  shared_ptr<VehicleBase> generateVehicles(double rand, Direction start);
 
   //run the simulation
   void run(int seed);

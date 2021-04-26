@@ -117,7 +117,7 @@ Driver::Driver(string infile){
 
 Driver::~Driver(){}
 
-VehicleBase* Driver::generateVehicles(double rand, Direction start){
+shared_ptr<VehicleBase> Driver::generateVehicles(double rand, Direction start){
 
   //Generate a new vehicle based on random number for each lane.
   //EAST
@@ -125,89 +125,89 @@ VehicleBase* Driver::generateVehicles(double rand, Direction start){
 		case Direction::east:
 			if(rand < east_truck_s){
 				if(rand < east_car_l){
-					return new VehicleBase(VehicleType::car, Direction::east, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::east, Turn::left));
 				}else if(rand < east_car_r){
-					return new VehicleBase(VehicleType::car, Direction::east, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::east, Turn::right));
 				}else if(rand < east_car_s){
-					return new VehicleBase(VehicleType::car, Direction::east, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::east, Turn::straight));
 				}else if(rand < east_SUV_l){
-					return new VehicleBase(VehicleType::suv, Direction::east, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::east, Turn::left));
 				}else if(rand < east_SUV_r){
-					return new VehicleBase(VehicleType::suv, Direction::east, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::east, Turn::right));
 				}else if(rand < east_SUV_s){
-					return new VehicleBase(VehicleType::suv, Direction::east, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::east, Turn::straight));
 				}else if(rand < east_truck_l){
-					return new VehicleBase(VehicleType::truck, Direction::east, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::east, Turn::left));
 				}else if(rand < east_truck_r){
-					return new VehicleBase(VehicleType::truck, Direction::east, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::east, Turn::right));
 				}else{
-					return new VehicleBase(VehicleType::truck, Direction::east, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::east, Turn::straight));
 				}
 			} return nullptr;
 		case Direction::west:
 			if(rand < west_truck_s){
 				if(rand < west_car_l){
-					return new VehicleBase(VehicleType::car, Direction::west, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::west, Turn::left));
 				}else if(rand < west_car_r){
-					return new VehicleBase(VehicleType::car, Direction::west, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::west, Turn::right));
 				}else if(rand < west_car_s){
-					return new VehicleBase(VehicleType::car, Direction::west, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::west, Turn::straight));
 				}else if(rand < west_SUV_l){
-					return new VehicleBase(VehicleType::suv, Direction::west, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::west, Turn::left));
 				}else if(rand < west_SUV_r){
-					return new VehicleBase(VehicleType::suv, Direction::west, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::west, Turn::right));
 				}else if(rand < west_SUV_s){
-					return new VehicleBase(VehicleType::suv, Direction::west, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::west, Turn::straight));
 				}else if(rand < west_truck_l){
-					return new VehicleBase(VehicleType::truck, Direction::west, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::west, Turn::left));
 				}else if(rand < west_truck_r){
-					return new VehicleBase(VehicleType::truck, Direction::west, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::west, Turn::right));
 				}else{
-					return new VehicleBase(VehicleType::truck, Direction::west, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::west, Turn::straight));
 				}
 			}return nullptr;
 		case Direction::north:
 			if(rand < north_truck_s){
 				if(rand < north_car_l){
-					return new VehicleBase(VehicleType::car, Direction::north, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::north, Turn::left));
 				}else if(rand < north_car_r){
-					return new VehicleBase(VehicleType::car, Direction::north, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::north, Turn::right));
 				}else if(rand < north_car_s){
-					return new VehicleBase(VehicleType::car, Direction::north, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::north, Turn::straight));
 				}else if(rand < north_SUV_l){
-					return new VehicleBase(VehicleType::suv, Direction::north, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::north, Turn::left));
 				}else if(rand < north_SUV_r){
-					return new VehicleBase(VehicleType::suv, Direction::north, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::north, Turn::right));
 				}else if(rand < north_SUV_s){
-					return new VehicleBase(VehicleType::suv, Direction::north, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::north, Turn::straight));
 				}else if(rand < north_truck_l){
-					return new VehicleBase(VehicleType::truck, Direction::north, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::north, Turn::left));
 				}else if(rand < north_truck_r){
-					return new VehicleBase(VehicleType::truck, Direction::north, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::north, Turn::right));
 				}else{
-					return new VehicleBase(VehicleType::truck, Direction::north, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::north, Turn::straight));
 				}
 			}return nullptr;
 		case Direction::south:
 			if(rand < south_truck_s){
 		    if(rand < south_car_l){
-					return new VehicleBase(VehicleType::car, Direction::south, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::south, Turn::left));
 		    }else if(rand < south_car_r){
-					return new VehicleBase(VehicleType::car, Direction::south, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::south, Turn::right));
 		    }else if(rand < south_car_s){
-					return new VehicleBase(VehicleType::car, Direction::south, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::south, Turn::straight));
 		    }else if(rand < south_SUV_l){
-					return new VehicleBase(VehicleType::suv, Direction::south, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::south, Turn::left));
 		    }else if(rand < south_SUV_r){
-					return new VehicleBase(VehicleType::suv, Direction::south, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::south, Turn::right));
 		    }else if(rand < south_SUV_s){
-					return new VehicleBase(VehicleType::suv, Direction::south, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::south, Turn::straight));
 		    }else if(rand < south_truck_l){
-					return new VehicleBase(VehicleType::truck, Direction::south, Turn::left);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::south, Turn::left));
 		    }else if(rand < south_truck_r){
-					return new VehicleBase(VehicleType::truck, Direction::south, Turn::right);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::south, Turn::right));
 		    }else{
-					return new VehicleBase(VehicleType::truck, Direction::south, Turn::straight);
+					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::south, Turn::straight));
 		    }
 		  } return nullptr;
 		}
@@ -247,16 +247,8 @@ int main(int argc, char* argv[]){
 
 
   bool ns_red = false;
-  // bool ew_red = true;
-  // bool ns_yellow = false;
-  // bool ew_yellow = false;
 
-	int stoplight_timer = 0;
-
-  // int ns_green_count;
-  // int ew_green_count;
-  // int ns_yellow_count;
-  // int ew_yellow_count;
+	int stoplight_timer = 0, til_red;
 
   char dummy;
   int clock = 0;
@@ -274,15 +266,18 @@ int main(int argc, char* argv[]){
 		lanes.new_vehicle(driver.generateVehicles(rand, Direction::west));
 
 		if(ns_red){
+			til_red = driver.green_east_west + driver.yellow_east_west - stoplight_timer;
 			if(stoplight_timer == driver.green_east_west){
 				anim.setLightEastWest(LightColor::yellow);
 			}else if(stoplight_timer == driver.green_east_west + driver.yellow_east_west){
 				anim.setLightEastWest(LightColor::red);
 				anim.setLightNorthSouth(LightColor::green);
 				ns_red = !ns_red;
+				til_red = driver.green_north_south + driver.yellow_north_south;
 				stoplight_timer = 0;
 			}
 		}else{
+			til_red = driver.green_north_south + driver.yellow_north_south - stoplight_timer;
 			if(stoplight_timer == 0){
 				anim.setLightNorthSouth(LightColor::green);
 			}else if (stoplight_timer == driver.green_north_south){
@@ -291,55 +286,10 @@ int main(int argc, char* argv[]){
 				anim.setLightNorthSouth(LightColor::red);
 				anim.setLightEastWest(LightColor::green);
 				ns_red = !ns_red;
+				til_red = driver.green_east_west + driver.yellow_east_west;
 				stoplight_timer = 0;
 			}
 		}
-    // if(!ns_red){
-    //   if(!ns_yellow){
-    //     ns_green_count++;
-    //   }else{
-    //     ns_yellow_count++;
-    //   }
-    // }
-		//
-		//
-    // if(!ew_red){
-    //   if(!ew_yellow){
-    //     ew_green_count++;
-    //   }else{
-    //     ew_yellow_count++;
-    //   }
-    // }
-		//
-    // if(ns_green_count == driver.green_north_south){
-    //   ns_yellow = true;
-    //   anim.setLightNorthSouth(LightColor::yellow);
-		// 	ns_green_count = 0;
-    // }
-		//
-    // if(ns_yellow_count == driver.yellow_north_south){
-    //   ns_yellow = false;
-    //   ns_red = true;
-    //   ew_red = false;
-    //   anim.setLightNorthSouth(LightColor::red);
-    //   anim.setLightEastWest(LightColor::green);
-		// 	ns_yellow_count = 0;
-    // }
-		//
-    // if(ew_green_count == driver.green_east_west){
-    //   ew_yellow = true;
-    //   anim.setLightEastWest(LightColor::yellow);
-		// 	ew_green_count = 0;
-    // }
-		//
-    // if(ew_yellow_count == driver.yellow_east_west){
-    //   ew_yellow = false;
-    //   ew_red = true;
-    //   ns_red = false;
-    //   anim.setLightEastWest(LightColor::red);
-    //   anim.setLightNorthSouth(LightColor::green);
-		// 	ew_yellow_count = 0;
-    // }
 
     anim.setVehiclesNorthbound(lanes.get_nb_lane());
     anim.setVehiclesWestbound(lanes.get_wb_lane());
@@ -350,98 +300,13 @@ int main(int argc, char* argv[]){
 
     cin.get(dummy);
 
-    lanes.advanceTops(ns_red, !ns_red);
+    lanes.advanceTops(ns_red,til_red);
     lanes.advanceBottoms();
     lanes.addFromQ();
-
-
 
     clock++;
 		stoplight_timer++;
   }
-
-
-
-
-  //
-  // int clock = 0;
-  //
-  // //traffic light variables
-  // bool ns_red = false;
-	// bool ew_red = true;
-	// int count_ns = 0;
-	// int count_ew = 0;
-  //
-  // //lanes object
-  // Lanes lanes{driver.number_of_sections_before_intersection};
-  //
-  // //Animator object
-  // Animator anim{driver.number_of_sections_before_intersection};
-  // Animator::MAX_VEHICLE_COUNT = 999;
-  //
-  // //used for input to progress simulation.
-  // char dummy;
-  //
-  // vector<VehicleBase> v;
-  // VehicleBase vb(VehicleType::car, Direction::east, Turn::left);
-  //
-  // //SIMULATION STARTS HERE
-  // //main loop for the simulation
-  // while(clock < driver.maximum_simulated_time){
-  //
-  //   //Set traffic lights
-	// 	if(count_ns == 0){ ns_red = false; }
-	// 	if(!ns_red){
-	// 		if(count_ns == 0){
-	// 			anim.setLightNorthSouth(LightColor::green);
-	// 		}else if(count_ns == driver.green_north_south){
-	// 			anim.setLightNorthSouth(LightColor::yellow);
-	// 		}else if(count_ns == driver.green_north_south + driver.yellow_north_south){
-	// 			anim.setLightNorthSouth(LightColor::red);
-	// 			ns_red = true;
-	// 			count_ew = 0;
-	// 		} count_ns++;
-	// 	}else{
-	// 		if(count_ew == 0){
-	// 			anim.setLightEastWest(LightColor::green);
-	// 			ew_red = false;
-	// 		}else if(count_ew == driver.green_east_west){
-	// 			anim.setLightEastWest(LightColor::yellow);
-	// 		}else if(count_ew == driver.green_east_west + driver.yellow_east_west){
-	// 			anim.setLightEastWest(LightColor::red);
-	// 			ew_red = true;
-	// 			count_ns = 0;
-	// 		} count_ew++;
-	// 	}
-  //
-  //   //generate a random number
-  //   rand = rand_double(randomNumberGenerator);
-  //
-  //   //generate vehicles based on rand
-  //   vb = driver.generateVehicles(rand);
-  //   v.push_back(vb);
-  //
-  //   lanes.new_vehicle(vb);
-  //
-  //   //update the lanes by one cycle
-	// 	// lanes.progress_lanes(ns_red, ew_red);
-  //
-  //   //give updated lanes to the animator
-	// 	anim.setVehiclesNorthbound(lanes.get_nb_lane());
-	// 	anim.setVehiclesWestbound(lanes.get_wb_lane());
-	// 	anim.setVehiclesSouthbound(lanes.get_sb_lane());
-	// 	anim.setVehiclesEastbound(lanes.get_eb_lane());
-  //
-  //   //draw the intersection
-	// 	anim.draw(clock);
-  //
-  //   //wait for input
-	// 	cin.get(dummy);
-  //
-  //   //iterate clock and loop
-  //   clock++;
-  // }
-  //
 
   return 0;
 }
