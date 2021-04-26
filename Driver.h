@@ -102,7 +102,7 @@ public:
   ~Driver();
 
   //construct and add vehicles to lanes in anim
-  void generateVehicles(double rand, Lanes lanes);
+  VehicleBase* generateVehicles(double rand, Direction start);
 
   //run the simulation
   void run(int seed);
