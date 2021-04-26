@@ -10,7 +10,8 @@ Use makefile to compile the code. To run the code, use command-line arguments fo
 
 Where the first argument is the name of the parameter-values input file, and the second argument is the initial seed passed to the random number generator.
 
-Each driver has a double variable for each type of vehicle and direction, which are calculated so that the user only has to generate one random number to decide which type of vehicle to make in each lane.
+Each driver has a double variable for each type of vehicle and direction, which are calculated so that the user only has to generate one random number to
+decide which type of vehicle to make in each lane.
 
 The program uses a coordinate system with each lane next to each other so that translations are constant for turns and continuing straight. The sections in the intersection that overlap are similarly checked for. The lanes also correspond with the y-coordinates and order of the enum class and it comes in handy that NB/SB are even and the EB/WB are odd. 
 
