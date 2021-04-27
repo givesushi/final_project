@@ -1,13 +1,10 @@
 #ifndef __COUNTER_H__
 #define __COUNTER_H__
 
-//#include "Driver.h"
+#include "VehicleBase.h"
 #include <iostream>
 #include <vector>
-
-enum class Direction   {north, south, east, west};
-enum class VehicleType {car, suv, truck};
-enum class Turn 			 {straight, right, left};
+#include <memory>
 
 class Counter{
 private:
@@ -38,7 +35,7 @@ public:
 	Counter();
 	~Counter();
 
-	void count(Direction d, VehicleType v, Turn t);
+	void count(shared_ptr<VehicleBase> vb_ptr);
 	void pstats();
 	std::vector<double> stats(int time);
 
