@@ -213,6 +213,10 @@ shared_ptr<VehicleBase> Driver::generateVehicles(double rand, Direction start){
 		}
 }
 
+vector<double> Driver::stats(){
+	vector<double> stats{prob_new_vehicle_northbound, prob_new_vehicle_southbound, prob_new_vehicle_eastbound, prob_new_vehicle_westbound, proportion_of_cars, proportion_of_SUVs, proportion_of_trucks, proportion_right_turn_cars, proportion_left_turn_cars, proportion_straight_cars, proportion_right_turn_SUVs, proportion_left_turn_SUVs, proportion_straight_SUVs, proportion_right_turn_trucks, proportion_left_turn_trucks, proportion_straight_trucks};
+	return stats;
+}
 
 
 /*
