@@ -4,31 +4,31 @@ Counter::Counter(){}
 
 Counter::~Counter(){}
 
-void Counter::count(Direction d, VehicleType v, Turn t){
+void Counter::count(shared_ptr<VehicleBase> vb_ptr){
 	no_total_vehicles++;
-	switch (d) {
+	switch (vb_ptr->getVehicleOriginalDirection()) {
 		case Direction::north : no_nb++; break;
 		case Direction::south : no_sb++; break;
 		case Direction::east : no_eb++; break;
 		case Direction::west : no_wb++; break;
 	}
-	switch (v){
+	switch (vb_ptr->getVehicleType()){
 		case VehicleType::car :
-			switch (t) {
+			switch (vb_ptr->getVehicleTurn()) {
 				case Turn::left : left_cars++; break;
 				case Turn::right : right_cars++; break;
 				case Turn::straight : straight_cars++; break;
 			}no_cars++;
 			break;
 		case VehicleType::suv :
-			switch (t) {
+			switch (vb_ptr->getVehicleTurn()) {
 				case Turn::left : left_SUVs++; break;
 				case Turn::right : right_SUVs++; break;
 				case Turn::straight : straight_SUVs++; break;
 			}no_SUVs++;
 				break;
 		case VehicleType::truck :
-			switch (t) {
+			switch (vb_ptr->getVehicleTurn()) {
 				case Turn::left : left_trucks++; break;
 				case Turn::right : right_trucks++; break;
 				case Turn::straight : straight_trucks++; break;
