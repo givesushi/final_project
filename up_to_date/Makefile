@@ -14,7 +14,7 @@ all: $(EXECS)
 simulate: $(OBJS) Simulate.o
 	$(CC) $(CCFLAGS) $^ -o $@
 
-test: $(OBJS) UnitTest.o
+test: $(OBJS) UnitTest.o Counter.o
 	$(CC) $(CCFLAGS) $^ -o $@
 
 %.o: %.cpp *.h
@@ -24,4 +24,4 @@ test: $(OBJS) UnitTest.o
 	$(CC) $(CCFLAGS) -c $<
 
 clean:
-	/bin/rm -f a.out $(OBJS) $(EXECS) UnitTest.o Simulate.o test
+	/bin/rm -f a.out $(OBJS) $(EXECS) UnitTest.o Simulate.o Counter.o test
