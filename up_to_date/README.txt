@@ -49,5 +49,5 @@ We used test-driven development (TDD) to create this program... See UnitTesting.
     positions in each vector are occupied by the correct vehicle. These tests also make sure that the logic for the intersection is working by checking right turns,
     stopping at the light, etc.
     
-  
-    
+
+To use makefile to compile the code, simply type "make" in the command line from inside the project directory. To rerun the simulation, first type "make clean" and then the simulation can be run again using "make." To run the unit tests, type "make test" in the command line.
