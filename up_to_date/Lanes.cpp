@@ -1,10 +1,6 @@
 #include "Lanes.h"
 
 Lanes::Lanes(int numSectionsBeforeIntersection){
-	nb_enter_busy = false;
-	sb_enter_busy = false;
-	eb_enter_busy = false;
-	wb_enter_busy = false;
 
 	lane_len = numSectionsBeforeIntersection*2 + 2;
 	halfSize = numSectionsBeforeIntersection;

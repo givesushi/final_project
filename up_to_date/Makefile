@@ -11,7 +11,10 @@ CCFLAGS = -std=c++11 -stdlib=libc++
 
 all: $(EXECS)
 
-simulate: $(OBJS)
+simulate: $(OBJS) Simulate.o
+	$(CC) $(CCFLAGS) $^ -o $@
+
+test: $(OBJS) UnitTest.o
 	$(CC) $(CCFLAGS) $^ -o $@
 
 %.o: %.cpp *.h
@@ -21,4 +24,4 @@ simulate: $(OBJS)
 	$(CC) $(CCFLAGS) -c $<
 
 clean:
-	/bin/rm -f a.out $(OBJS) $(EXECS)
+	/bin/rm -f a.out $(OBJS) $(EXECS) UnitTest.o Simulate.o test

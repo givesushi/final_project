@@ -23,20 +23,13 @@ public:
 	queue<shared_ptr<VehicleBase>> eb_qq;
 	queue<shared_ptr<VehicleBase>> wb_qq;
 
-	bool nb_enter_busy;
-	bool sb_enter_busy;
-	bool eb_enter_busy;
-	bool wb_enter_busy;
-
 	int lane_len;
  	int halfSize;
-
 
 	// Constructors
 	Lanes(int numSectionsBeforeIntersection);
 	~Lanes();
 
-	void progress_lanes(bool ns_red, bool ew_red);
 	void new_vehicle(shared_ptr<VehicleBase> vb);
 	void advanceTops(bool ns_red, int til_red);
 	void advanceBottoms();
