@@ -4,12 +4,14 @@ Jake Carlson
 
 README explaining design decisions and how to compile and run the code.
 
-Use makefile to compile the code. To run the code, use command-line arguments following this template:
+To use makefile to compile the code, simply type "make" in the command line from inside the project directory. To run the code,
+use command-line arguments following this template:
 
 ./simulate [input file] [initial seed]
 
 Where the first argument is the name of the parameter-values input file, and the second argument is the initial seed passed to the random number generator.
 
+To compile the unit testing, do "make test" and run the unit tests with ./test
 
 Design Decisions: 
   
@@ -49,6 +51,3 @@ We used test-driven development (TDD) to create this program... See UnitTesting.
     positions in each vector are occupied by the correct vehicle. These tests also make sure that the logic for the intersection is working by checking right turns,
     stopping at the light, etc.
     
-
-To use makefile to compile the code, simply type "make" in the command line from inside the project directory. To rerun the simulation, first type "make clean" and
-then the simulation can be run again using "make." To run the unit tests, enter "make test" in the command line.
