@@ -11,7 +11,10 @@ using namespace std;
 TEST_CASE("Testing Driver"){
 	Driver d{"input_file_format.txt"};
 
+	//note that these tests passing are dependent on the values given in the sample input
 	SECTION("Generating a vehicle"){
+
+		//test for some random value that the correct vehicles are being constructed in generateVehicles
 		double rand = .01;
 		auto vb_ptr = d.generateVehicles(rand, Direction::north);
 		REQUIRE(vb_ptr != nullptr);
@@ -36,19 +39,73 @@ TEST_CASE("Testing Driver"){
 		REQUIRE(vb_ptr->getVehicleID() == 3);
 		REQUIRE(vb_ptr->getVehicleType() == VehicleType::car);
 		REQUIRE(vb_ptr->getVehicleTurn() == Turn::right);
-	}
 
-	SECTION("Adding Vehicle to queue"){
-		Lanes lanes{5};
-		shared_ptr<VehicleBase> vb_ptr = shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::north, Turn::straight));
-		lanes.new_vehicle(vb_ptr);
-		
+		//test a high random number will cause no vehicles to generate in any direction
+		rand = .99;
+		vb_ptr = d.generateVehicles(rand, Direction::east);
+		REQUIRE(vb_ptr == nullptr);
+
+		vb_ptr = d.generateVehicles(rand, Direction::west);
+		REQUIRE(vb_ptr == nullptr);
+
+		vb_ptr = d.generateVehicles(rand, Direction::north);
+		REQUIRE(vb_ptr == nullptr);
+
+		vb_ptr = d.generateVehicles(rand, Direction::south);
+		REQUIRE(vb_ptr == nullptr);
+
 	}
 }
 
 TEST_CASE("Testing lanes"){
 	Driver d{"input_file_format.txt"};
 	Lanes lanes{5};
+	
+	SECTION("Adding Vehicle to queue"){
+
+		//test adding to northbound queue
+		shared_ptr<VehicleBase> vb_ptr = shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::north, Turn::straight));
+		lanes.new_vehicle(vb_ptr);
+
+
+		REQUIRE(lanes.nb_qq.front() != nullptr);
+		REQUIRE(lanes.nb_qq.front()->getVehicleType() == VehicleType::car);
+		REQUIRE(lanes.nb_qq.front()->getVehicleTurn() == Turn::straight);
+		REQUIRE(lanes.nb_qq.front()->getVehicleOriginalDirection() == Direction::north);
+		REQUIRE(lanes.nb_qq.front()->getVehicleID() == 4);
+
+		//test adding to southbound queue
+		vb_ptr = shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::south, Turn::left));
+		lanes.new_vehicle(vb_ptr);
+
+		REQUIRE(lanes.sb_qq.front() != nullptr);
+		REQUIRE(lanes.sb_qq.front()->getVehicleType() == VehicleType::truck);
+		REQUIRE(lanes.sb_qq.front()->getVehicleTurn() == Turn::left);
+		REQUIRE(lanes.sb_qq.front()->getVehicleOriginalDirection() == Direction::south);
+		REQUIRE(lanes.sb_qq.front()->getVehicleID() == 5);
+
+		//test adding to eastbound queue
+		vb_ptr = shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::east, Turn::right));
+		lanes.new_vehicle(vb_ptr);
+
+		REQUIRE(lanes.eb_qq.front() != nullptr);
+		REQUIRE(lanes.eb_qq.front()->getVehicleType() == VehicleType::suv);
+		REQUIRE(lanes.eb_qq.front()->getVehicleTurn() == Turn::right);
+		REQUIRE(lanes.eb_qq.front()->getVehicleOriginalDirection() == Direction::east);
+		REQUIRE(lanes.eb_qq.front()->getVehicleID() == 6);
+
+
+		//test adding to westbound queue
+		vb_ptr = shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::west, Turn::straight));
+		lanes.new_vehicle(vb_ptr);
+
+		REQUIRE(lanes.wb_qq.front() != nullptr);
+		REQUIRE(lanes.wb_qq.front()->getVehicleType() == VehicleType::suv);
+		REQUIRE(lanes.wb_qq.front()->getVehicleTurn() == Turn::straight);
+		REQUIRE(lanes.wb_qq.front()->getVehicleOriginalDirection() == Direction::west);
+		REQUIRE(lanes.wb_qq.front()->getVehicleID() == 7);
+	}
+
 
 	SECTION("Checking advance lanes - straight"){
 		int til_red = 10;
