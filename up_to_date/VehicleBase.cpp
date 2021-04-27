@@ -19,7 +19,7 @@ VehicleBase::VehicleBase(VehicleBase&& other) noexcept
         other.vehicleTurn = static_cast<Turn>(999);
         other.turning = false;
 				other.len = 0;
-				std::cout << "MOVE CONSTRUCTOR " << vehicleID << std::endl;
+				// std::cout << "MOVE CONSTRUCTOR " << vehicleID << std::endl;
       }
 
 VehicleBase::VehicleBase(VehicleType type, Direction direction, Turn turn)
@@ -39,7 +39,7 @@ VehicleBase::VehicleBase(const VehicleBase& other)
 			turning(other.turning),
 			len(other.len)
 {
-	std::cout << "COPY CONSTRUCTOR " << vehicleID << std::endl;
+	// std::cout << "COPY CONSTRUCTOR " << vehicleID << std::endl;
 }
 
 	//copy operator
@@ -47,7 +47,7 @@ VehicleBase& VehicleBase::operator=(const VehicleBase& other){
 	 if(this == &other){
 	   return *this;
 	 }
-	 std::cout << "COPYING " << other.vehicleID << std::endl;
+	 // std::cout << "COPYING " << other.vehicleID << std::endl;
 
 	  vehicleID = other.vehicleID;
 	  vehicleType = other.vehicleType;
@@ -64,7 +64,7 @@ VehicleBase& VehicleBase::operator=(const VehicleBase& other){
 	  if(this == &other){
 	    return *this;
 	  }
-		std::cout << "MOVING " << other.vehicleID << std::endl;
+		 // std::cout << "MOVING " << other.vehicleID << std::endl;
 	  vehicleID = other.vehicleID;
 	  vehicleType = other.vehicleType;
 	  vehicleDirection = other.vehicleDirection;
@@ -83,7 +83,7 @@ VehicleBase& VehicleBase::operator=(const VehicleBase& other){
 	}
 
 VehicleBase::~VehicleBase() {
-	std::cout << "VB Destroyed : " << this << " : " << this->vehicleID << std::endl;
+	// std::cout << "VB Destroyed : " << this << " : " << this->vehicleID << std::endl;
 }
 
 #endif
