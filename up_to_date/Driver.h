@@ -105,8 +105,7 @@ public:
   //construct and add vehicles to lanes in anim
   shared_ptr<VehicleBase> generateVehicles(double rand, Direction start);
 
-  //run the simulation
-  void run(int seed);
+  vector<double> stats();
 
 };
 
