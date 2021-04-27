@@ -13,7 +13,7 @@ Lanes::Lanes(int numSectionsBeforeIntersection){
 }
 
 Lanes::~Lanes(){
-	cout << "Lanes destroyed" << endl;
+	// cout << "Lanes destroyed" << endl;
 }
 
 void Lanes::new_vehicle(shared_ptr<VehicleBase> vb){
