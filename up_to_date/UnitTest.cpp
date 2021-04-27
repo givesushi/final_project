@@ -3,6 +3,7 @@
 #include "Lanes.h"
 #include "Driver.h"
 #include "VehicleBase.h"
+#include "Counter.h"
 #include <memory>
 #include <iostream>
 
@@ -212,3 +213,81 @@ TEST_CASE("Testing lanes"){
 
 	}
 }
+
+TEST_CASE("Testing VehicleBase"){
+
+	SECTION("Copy Constructor"){
+		VehicleBase vb{VehicleType::car, Direction::north, Turn::straight};
+		VehicleBase vbCopy(vb);
+
+		REQUIRE(vbCopy.getVehicleID() == vb.getVehicleID());
+		REQUIRE(vbCopy.getVehicleType() == vb.getVehicleType());
+		REQUIRE(vbCopy.getVehicleTurn() == vb.getVehicleTurn());
+		REQUIRE(vbCopy.getVehicleOriginalDirection() == vb.getVehicleOriginalDirection());
+	}
+
+	SECTION("Move Constructor"){
+		VehicleBase vb{VehicleType::car, Direction::north, Turn::straight};
+		VehicleBase vbCopy(move(vb));
+
+		REQUIRE(vbCopy.getVehicleID() != vb.getVehicleID());
+		REQUIRE(vbCopy.getVehicleType() != vb.getVehicleType());
+		REQUIRE(vbCopy.getVehicleTurn() != vb.getVehicleTurn());
+		REQUIRE(vbCopy.getVehicleOriginalDirection() != vb.getVehicleOriginalDirection());
+	}
+
+	SECTION("Copy Assignment Operator"){
+		VehicleBase vb{VehicleType::car, Direction::north, Turn::straight};
+		VehicleBase vbCopy = vb;
+
+		REQUIRE(vbCopy.getVehicleID() == vb.getVehicleID());
+		REQUIRE(vbCopy.getVehicleType() == vb.getVehicleType());
+		REQUIRE(vbCopy.getVehicleTurn() == vb.getVehicleTurn());
+		REQUIRE(vbCopy.getVehicleOriginalDirection() == vb.getVehicleOriginalDirection());
+	}
+
+	SECTION("Move Assignment Operator"){
+		VehicleBase vb{VehicleType::car, Direction::north, Turn::straight};
+		VehicleBase vbCopy = move(vb);
+
+		REQUIRE(vbCopy.getVehicleID() != vb.getVehicleID());
+		REQUIRE(vbCopy.getVehicleType() != vb.getVehicleType());
+		REQUIRE(vbCopy.getVehicleTurn() != vb.getVehicleTurn());
+		REQUIRE(vbCopy.getVehicleOriginalDirection() != vb.getVehicleOriginalDirection());
+	}
+}
+
+TEST_CASE("Testing Generate Correction Proportions"){
+	Driver d{"input_file_format.txt"};
+	mt19937 randomNumberGenerator;
+  uniform_real_distribution<double> rand_double(0.0, 1.0);
+
+	SECTION("Counting Cars"){
+		int time = 0;
+		Counter c;
+		double rand;
+		while(time < 1000){
+			rand = rand_double(randomNumberGenerator);
+			auto vb_ptr = d.generateVehicles(rand, Direction::north);
+			if(vb_ptr != nullptr) c.count(vb_ptr);
+			vb_ptr = d.generateVehicles(rand, Direction::south);
+			if(vb_ptr != nullptr) c.count(vb_ptr);
+			vb_ptr = d.generateVehicles(rand, Direction::east);
+			if(vb_ptr != nullptr) c.count(vb_ptr);
+			vb_ptr = d.generateVehicles(rand, Direction::west);
+			if(vb_ptr != nullptr) c.count(vb_ptr);
+
+			time++;
+		}
+		vector<double> counted = c.stats(time);
+		vector<double> inputs = d.stats();
+		double margin;
+		for(int i = 0; i < inputs.size(); i++){
+			margin = (inputs[i] - counted[i])*(inputs[i] - counted[i]);
+			margin = margin/inputs[i];
+			REQUIRE(margin < .05);
+		}
+
+	}
+}
+
