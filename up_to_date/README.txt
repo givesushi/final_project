@@ -50,4 +50,5 @@ We used test-driven development (TDD) to create this program... See UnitTesting.
     stopping at the light, etc.
     
 
-To use makefile to compile the code, simply type "make" in the command line from inside the project directory. To rerun the simulation, first type "make clean" and then the simulation can be run again using "make." To run the unit tests, type "make test" in the command line.
+To use makefile to compile the code, simply type "make" in the command line from inside the project directory. To rerun the simulation, first type "make clean" and
+then the simulation can be run again using "make." To run the unit tests, type "make test" in the command line.
