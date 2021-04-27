@@ -18,46 +18,6 @@ Lanes::Lanes(int numSectionsBeforeIntersection){
 
 Lanes::~Lanes(){
 	cout << "Lanes destroyed" << endl;
-	// for(int i = 0; i < lane_len; i++){
-	// 	if(nb_lane[i] != nullptr){
-	// 		for(int j = 1; j < nb_lane[i]->get_len(); j++){
-	// 			if(i+j < lane_len) { nb_lane[i+j] = nullptr; }
-	// 		}
-	// 		delete nb_lane[i];
-	// 	}
-	// 	if(sb_lane[i] != nullptr){
-	// 		for(int j = 1; j < sb_lane[i]->get_len(); j++){
-	// 			if(i+j < lane_len) { sb_lane[i+j] = nullptr; }
-	// 		}
-	// 		delete sb_lane[i];
-	// 	}
-	// 	if(eb_lane[i] != nullptr){
-	// 		for(int j = 1; j < eb_lane[i]->get_len(); j++){
-	// 			if(i+j < lane_len) { eb_lane[i+j] = nullptr; }
-	// 		}
-	// 		delete eb_lane[i];
-	// 	}
-	// 	if(wb_lane[i] != nullptr){
-	// 		for(int j = 1; j < wb_lane[i]->get_len(); j++){
-	// 			if(i+j < lane_len) { wb_lane[i+j] = nullptr; }
-	// 		}
-	// 		delete wb_lane[i];
-	// 	}
-	// }
-	// while(!nb_qq.empty()){
-	// 	delete nb_qq.front();
-	// 	nb_qq.pop();
-	// }while(!sb_qq.empty()){
-	// 	delete sb_qq.front();
-	// 	sb_qq.pop();
-	// }while(!eb_qq.empty()){
-	// 	delete eb_qq.front();
-	// 	eb_qq.pop();
-	// }while(!wb_qq.empty()){
-	// 	delete wb_qq.front();
-	// 	wb_qq.pop();
-	// }
-
 }
 
 void Lanes::new_vehicle(shared_ptr<VehicleBase> vb){
