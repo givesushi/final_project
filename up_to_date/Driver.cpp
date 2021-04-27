@@ -125,19 +125,19 @@ shared_ptr<VehicleBase> Driver::generateVehicles(double rand, Direction start){
 		case Direction::east:
 			if(rand < east_truck_s){
 				if(rand < east_car_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::east, Turn::left));
+					return nullptr;
 				}else if(rand < east_car_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::east, Turn::right));
 				}else if(rand < east_car_s){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::east, Turn::straight));
 				}else if(rand < east_SUV_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::east, Turn::left));
+					return nullptr;
 				}else if(rand < east_SUV_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::east, Turn::right));
 				}else if(rand < east_SUV_s){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::east, Turn::straight));
 				}else if(rand < east_truck_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::east, Turn::left));
+					return nullptr;
 				}else if(rand < east_truck_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::east, Turn::right));
 				}else{
@@ -147,19 +147,19 @@ shared_ptr<VehicleBase> Driver::generateVehicles(double rand, Direction start){
 		case Direction::west:
 			if(rand < west_truck_s){
 				if(rand < west_car_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::west, Turn::left));
+					return nullptr;
 				}else if(rand < west_car_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::west, Turn::right));
 				}else if(rand < west_car_s){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::west, Turn::straight));
 				}else if(rand < west_SUV_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::west, Turn::left));
+					return nullptr;
 				}else if(rand < west_SUV_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::west, Turn::right));
 				}else if(rand < west_SUV_s){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::west, Turn::straight));
 				}else if(rand < west_truck_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::west, Turn::left));
+					return nullptr;
 				}else if(rand < west_truck_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::west, Turn::right));
 				}else{
@@ -169,19 +169,19 @@ shared_ptr<VehicleBase> Driver::generateVehicles(double rand, Direction start){
 		case Direction::north:
 			if(rand < north_truck_s){
 				if(rand < north_car_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::north, Turn::left));
+					return nullptr;
 				}else if(rand < north_car_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::north, Turn::right));
 				}else if(rand < north_car_s){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::north, Turn::straight));
 				}else if(rand < north_SUV_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::north, Turn::left));
+					return nullptr;
 				}else if(rand < north_SUV_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::north, Turn::right));
 				}else if(rand < north_SUV_s){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::north, Turn::straight));
 				}else if(rand < north_truck_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::north, Turn::left));
+					return nullptr;
 				}else if(rand < north_truck_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::north, Turn::right));
 				}else{
@@ -191,19 +191,19 @@ shared_ptr<VehicleBase> Driver::generateVehicles(double rand, Direction start){
 		case Direction::south:
 			if(rand < south_truck_s){
 		    if(rand < south_car_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::south, Turn::left));
+					return nullptr;
 		    }else if(rand < south_car_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::south, Turn::right));
 		    }else if(rand < south_car_s){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::car, Direction::south, Turn::straight));
 		    }else if(rand < south_SUV_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::south, Turn::left));
+					return nullptr;
 		    }else if(rand < south_SUV_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::south, Turn::right));
 		    }else if(rand < south_SUV_s){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::suv, Direction::south, Turn::straight));
 		    }else if(rand < south_truck_l){
-					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::south, Turn::left));
+					return nullptr;
 		    }else if(rand < south_truck_r){
 					return shared_ptr<VehicleBase>(new VehicleBase(VehicleType::truck, Direction::south, Turn::right));
 		    }else{
