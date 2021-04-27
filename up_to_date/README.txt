@@ -42,7 +42,8 @@ We used test-driven development (TDD) to create this program... See UnitTesting.
   Driver Tests: 
     We test generateVehicles by creating a double rand, and calling generateVehicles with it. We check that the correct type of vehicles are made. Note that these
     tests are dependent on the sample input file and may not pass if the sample proportions change. We also test that when rand is very high, .99, no vehicles will
-    generate.
+    generate. Counter.cpp is a class which keeps track of how many vehicles are made and of each type, direction, and turn type. We use this in a unit test which
+    checks if the correct proportions of vehicles are being made by our generateVehicles method. 
     
   Lanes Tests: 
     We test adding the the queues by creating VehicleBase objects, passing them to the new_vehicle function in Lanes, and checking the queues. 
@@ -50,4 +51,12 @@ We used test-driven development (TDD) to create this program... See UnitTesting.
     We test advancing the lanes vectors by adding VehicleBase objects to the lanes, calling the functions which advance the lanes, and checking that the correct
     positions in each vector are occupied by the correct vehicle. These tests also make sure that the logic for the intersection is working by checking right turns,
     stopping at the light, etc.
+    
+  VehicleBase Tests:
+    We tested the copy and move constructors and operators by creating a VehicleBase object and calling the appropriate constructor or operator to make a copy, then
+    checking that the member variables of each vehicle are what we expect.
+  
+  
+    
+    
     
